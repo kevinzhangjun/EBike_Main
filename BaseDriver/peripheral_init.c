@@ -41,8 +41,8 @@ void peripheral_init(void) {
     PTE->PCOR = 1;   // LED on
     PTE->PSOR = 1;   // LED off
 
-    PORTB->PCR[1] |= PORT_PCR_MUX(1); // CAN/UART TX is GPIO
-    PTB->PDDR |= 2; // PB2 is output
+//    PORTB->PCR[1] |= PORT_PCR_MUX(1); // CAN/UART TX is GPIO
+//    PTB->PDDR |= 2; // PB2 is output
 
 //    SIM->CHIPCTL |= 0x00000004;   // route ADC0_SE8 to portB pin 13 - NEC board
 

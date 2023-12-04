@@ -10,6 +10,9 @@
 #include "adc.h"
 #include "motor_control.h"
 
+#define TIMING_PIN_HIGH  { PTD->PSOR = (1<<6); }
+#define TIMING_PIN_LOW  { PTD->PCOR = (1<<6); }
+
 // These are lists of ADC channels we need to read besides motor stuff.
 int ADC0_channels[9] = { 0, 1, 2, 3, 6, 12, 7, 13, 14 };
 //int ADC1_channels[8] = { 10, 0, 1, 2, 3, 4, 5, 6 };
@@ -19,7 +22,7 @@ int32_t pot1;
 int32_t pot2;
 
 void FTM3_Ovf_Reload_IRQHandler(void) {
-	PTB->PSOR = 2; // turn on TX pin
+	TIMING_PIN_HIGH
 	// Start conversion of phase A current on both motors
 	convertAdcChan(ADC0, 9); // convert M1 I_A
 	convertAdcChan(ADC1, 8); // convert M2 I_A
@@ -42,8 +45,6 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	// There might be time to do a little in here
 	while(adc_complete(ADC0)==0){} /* Wait for conversion complete flag for A-phase currents */
 
-	//	PTE->PSOR = 1;   // LED off
-
 	// Store the reading of phase A currents
 	M1.I_A = read_adc_ch(ADC0, 0);
 	M2.I_A = read_adc_ch(ADC1, 0);
@@ -52,7 +53,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	// Start conversion of phase B current on both motors
 	convertAdcChan(ADC0, 8); // convert M1 I_B
 	convertAdcChan(ADC1, 7); // convert M2 I_B
-	PTB->PCOR = 2; // turn off TX pin
+	TIMING_PIN_LOW
 
 	// read HALL sensors for Motor 2  - Nice IO selection...
 	M2.hall_input = ((PTA->PDIR >> 11) & 7);
@@ -60,7 +61,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	// There might be time to do a little in here
 
 	while(adc_complete(ADC0)==0){} /* Wait for conversion complete flag for B-phase currents */
-	PTB->PSOR = 2; // turn on TX pin
+	TIMING_PIN_HIGH
 	// Store the reading of phase B currents
 	M1.I_B = read_adc_ch(ADC0, 0);
 	M2.I_B = read_adc_ch(ADC1, 0);
@@ -124,5 +125,5 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
         x += led_speed;
 //        x += 3; // soft blink speed
     }
-	PTB->PCOR = 2; // turn off TX pin
+    TIMING_PIN_LOW
 }
