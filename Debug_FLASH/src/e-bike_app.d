@@ -31,7 +31,18 @@ src/e-bike_app.o: ../src/e-bike_app.c ../src/e-bike_app.h \
  C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/edma_driver.h \
  C:/workspace_git/EBike_Main/BaseDriver/Timer.h \
  C:/workspace_git/EBike_Main/BaseDriver/Gpio.h \
- C:/workspace_git/EBike_Main/src/e-bike_app.h
+ C:/workspace_git/EBike_Main/src/e-bike_app.h \
+ C:/workspace_git/EBike_Main/board/peripherals_adc_pal_1.h \
+ C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal.h \
+ C:/workspace_git/EBike_Main/board/adc_pal_cfg.h \
+ C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal_mapping.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/adc_driver.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/src/adc/adc_hw_access.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/trgmux_driver.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/pdb_driver.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock_manager.h \
+ C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock.h \
+ C:/workspace_git/EBike_Main/BaseDriver/Adc.h
 
 ../src/e-bike_app.h:
 
@@ -100,3 +111,25 @@ C:/workspace_git/EBike_Main/BaseDriver/Timer.h:
 C:/workspace_git/EBike_Main/BaseDriver/Gpio.h:
 
 C:/workspace_git/EBike_Main/src/e-bike_app.h:
+
+C:/workspace_git/EBike_Main/board/peripherals_adc_pal_1.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal.h:
+
+C:/workspace_git/EBike_Main/board/adc_pal_cfg.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal_mapping.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/adc_driver.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/src/adc/adc_hw_access.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/trgmux_driver.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/pdb_driver.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock_manager.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock.h:
+
+C:/workspace_git/EBike_Main/BaseDriver/Adc.h:

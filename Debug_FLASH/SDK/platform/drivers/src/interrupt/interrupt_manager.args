@@ -2,9 +2,10 @@
 -DCPU_S32K142
 -DDEV_ERROR_DETECT
 -I"C:/workspace_git/EBike_Main/src"
--I"C:/workspace_git/EBike_Main/SDK/platform/drivers/inc"
+-I"C:/workspace_git/EBike_Main/SDK/platform/drivers/src/adc"
 -I"C:/workspace_git/EBike_Main/SDK/platform/pal/inc"
 -I"C:/workspace_git/EBike_Main/SDK/platform/pal/src/timing"
+-I"C:/workspace_git/EBike_Main/SDK/platform/pal/src/adc"
 -I"C:/workspace_git/EBike_Main/BaseDriver"
 -I"C:/workspace_git/EBike_Main/board"
 -I"C:/workspace_git/EBike_Main/SDK/platform/devices/S32K142/include"

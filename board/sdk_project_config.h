@@ -27,7 +27,8 @@
 #include "Timer.h"
 #include "Gpio.h"
 #include "e-bike_app.h"
-
+#include "peripherals_adc_pal_1.h"
+#include "Adc.h"
 
 #endif /* SDK_PROJECT_CONFIG_H_ */
 

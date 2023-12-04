@@ -12,7 +12,10 @@ RM := rm -rf
 -include board/subdir.mk
 -include SDK/rtos/osif/subdir.mk
 -include SDK/platform/pal/src/timing/subdir.mk
+-include SDK/platform/pal/src/adc/subdir.mk
+-include SDK/platform/drivers/src/trgmux/subdir.mk
 -include SDK/platform/drivers/src/pins/subdir.mk
+-include SDK/platform/drivers/src/pdb/subdir.mk
 -include SDK/platform/drivers/src/lpuart/subdir.mk
 -include SDK/platform/drivers/src/lptmr/subdir.mk
 -include SDK/platform/drivers/src/lpit/subdir.mk
@@ -20,6 +23,7 @@ RM := rm -rf
 -include SDK/platform/drivers/src/ftm/subdir.mk
 -include SDK/platform/drivers/src/edma/subdir.mk
 -include SDK/platform/drivers/src/clock/S32K1xx/subdir.mk
+-include SDK/platform/drivers/src/adc/subdir.mk
 -include SDK/platform/devices/S32K142/startup/subdir.mk
 -include SDK/platform/devices/subdir.mk
 -include Project_Settings/Startup_Code/subdir.mk
