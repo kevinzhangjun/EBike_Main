@@ -6,17 +6,23 @@
 C_SRCS += \
 ../BaseDriver/Gpio.c \
 ../BaseDriver/Timer.c \
-../BaseDriver/lpuart_LPUART_0.c 
+../BaseDriver/adc.c \
+../BaseDriver/lpuart_LPUART_0.c \
+../BaseDriver/peripheral_init.c 
 
 OBJS += \
 ./BaseDriver/Gpio.o \
 ./BaseDriver/Timer.o \
-./BaseDriver/lpuart_LPUART_0.o 
+./BaseDriver/adc.o \
+./BaseDriver/lpuart_LPUART_0.o \
+./BaseDriver/peripheral_init.o 
 
 C_DEPS += \
 ./BaseDriver/Gpio.d \
 ./BaseDriver/Timer.d \
-./BaseDriver/lpuart_LPUART_0.d 
+./BaseDriver/adc.d \
+./BaseDriver/lpuart_LPUART_0.d \
+./BaseDriver/peripheral_init.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

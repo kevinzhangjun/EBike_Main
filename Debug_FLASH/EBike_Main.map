@@ -12,6 +12,8 @@ C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eab
                               C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-exit.o) (_global_impure_ptr)
 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
                               C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o (__libc_init_array)
+C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+                              ./src/motor_control.o (memcpy)
 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memset.o)
                               C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o (memset)
 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libnosys.a(_exit.o)
@@ -22,10 +24,13 @@ Common symbol       size              file
 
 Speed_Value_lst     0x2               ./src/e-bike_app.o
 s2_scan             0x2               ./BaseDriver/Gpio.o
+ADC_filter_state    0x24              ./BaseDriver/adc.o
 Candence_Out_500us  0x2               ./src/e-bike_app.o
 hallcode            0x1               ./src/e-bike_app.o
+pot2                0x4               ./src/pwm_isr.o
 tx0_2ms             0x1               ./BaseDriver/lpuart_LPUART_0.o
 s2_Falling          0x2               ./BaseDriver/Gpio.o
+ADC_results         0x12              ./BaseDriver/adc.o
 Speed_Mil_Hr        0x4               ./src/e-bike_app.o
 Speed_Cnt_500us     0x2               ./src/e-bike_app.o
 g_xtal0ClkFreq      0x4               ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
@@ -34,10 +39,12 @@ g_ftmChannelRunning
 s2_ap_ll            0x2               ./BaseDriver/Gpio.o
 Candence_Out_Value  0x2               ./src/e-bike_app.o
 s2_Rising           0x2               ./BaseDriver/Gpio.o
+M1A                 0x4               ./src/motor_control.o
 s2_8ms              0x2               ./BaseDriver/Gpio.o
 timer_500us         0x1               ./BaseDriver/Timer.o
 tx0_buf             0x100             ./BaseDriver/lpuart_LPUART_0.o
 s2_ap               0x2               ./BaseDriver/Gpio.o
+pot1                0x4               ./src/pwm_isr.o
 Speed_Value         0x2               ./src/e-bike_app.o
 key_info            0x8               ./BaseDriver/Gpio.o
 g_RtcClkInFreq      0x4               ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
@@ -50,9 +57,13 @@ LED_4ms             0x4               ./BaseDriver/Timer.o
 g_TClkFreq          0xc               ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
 Candence_In_Value   0x2               ./src/e-bike_app.o
 EB_APP_ST           0x2c              ./src/e-bike_app.o
+M1B                 0x4               ./src/motor_control.o
+M1                  0x44              ./src/motor_control.o
+M2                  0x44              ./src/motor_control.o
 Candence_In_500us   0x2               ./src/e-bike_app.o
 dmaController1_State
                     0x40              ./board/peripherals_dmaController1.o
+ADC_filtered        0x12              ./BaseDriver/adc.o
 dmaController1Chn0_State
                     0x10              ./board/peripherals_dmaController1.o
 
@@ -208,6 +219,28 @@ Discarded input sections
  .debug_macro   0x00000000       0xbe ./BaseDriver/Timer.o
  .debug_macro   0x00000000       0x40 ./BaseDriver/Timer.o
  .debug_macro   0x00000000       0x28 ./BaseDriver/Timer.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .group         0x00000000        0x8 ./BaseDriver/adc.o
+ .text          0x00000000        0x0 ./BaseDriver/adc.o
+ .data          0x00000000        0x0 ./BaseDriver/adc.o
+ .bss           0x00000000        0x0 ./BaseDriver/adc.o
+ .text.ADC_init
+                0x00000000       0x3a ./BaseDriver/adc.o
+ .debug_macro   0x00000000      0x8d4 ./BaseDriver/adc.o
+ .debug_macro   0x00000000       0x22 ./BaseDriver/adc.o
+ .debug_macro   0x00000000       0x4f ./BaseDriver/adc.o
+ .debug_macro   0x00000000       0x51 ./BaseDriver/adc.o
+ .debug_macro   0x00000000       0xef ./BaseDriver/adc.o
+ .debug_macro   0x00000000       0x6a ./BaseDriver/adc.o
+ .debug_macro   0x00000000      0x1df ./BaseDriver/adc.o
  .group         0x00000000        0x8 ./BaseDriver/lpuart_LPUART_0.o
  .group         0x00000000        0x8 ./BaseDriver/lpuart_LPUART_0.o
  .group         0x00000000        0x8 ./BaseDriver/lpuart_LPUART_0.o
@@ -234,17 +267,63 @@ Discarded input sections
  .debug_macro   0x00000000      0x16d ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x10 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x79 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_macro   0x00000000       0x16 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x22 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x4f ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x51 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0xef ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x6a ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000      0x1df ./BaseDriver/lpuart_LPUART_0.o
+ .debug_macro   0x00000000     0xeedc ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000      0xba6 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x22 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x10 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x16 ./BaseDriver/lpuart_LPUART_0.o
  .debug_macro   0x00000000       0x10 ./BaseDriver/lpuart_LPUART_0.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .group         0x00000000        0x8 ./BaseDriver/peripheral_init.o
+ .text          0x00000000        0x0 ./BaseDriver/peripheral_init.o
+ .data          0x00000000        0x0 ./BaseDriver/peripheral_init.o
+ .bss           0x00000000        0x0 ./BaseDriver/peripheral_init.o
+ .text.Motor_Timer_Init
+                0x00000000       0x68 ./BaseDriver/peripheral_init.o
+ .text.peripheral_init
+                0x00000000      0x184 ./BaseDriver/peripheral_init.o
+ .debug_info    0x00000000      0xa47 ./BaseDriver/peripheral_init.o
+ .debug_abbrev  0x00000000      0x18b ./BaseDriver/peripheral_init.o
+ .debug_loc     0x00000000       0x21 ./BaseDriver/peripheral_init.o
+ .debug_aranges
+                0x00000000       0x28 ./BaseDriver/peripheral_init.o
+ .debug_ranges  0x00000000       0x18 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0xac ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000      0x8d4 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x16 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x22 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x4f ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x51 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0xef ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x6a ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000      0x1df ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000     0xeedc ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x22 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x22 ./BaseDriver/peripheral_init.o
+ .debug_macro   0x00000000       0x46 ./BaseDriver/peripheral_init.o
+ .debug_line    0x00000000      0x33a ./BaseDriver/peripheral_init.o
+ .debug_str     0x00000000    0x6401d ./BaseDriver/peripheral_init.o
+ .comment       0x00000000       0xa1 ./BaseDriver/peripheral_init.o
+ .debug_frame   0x00000000       0x3c ./BaseDriver/peripheral_init.o
+ .ARM.attributes
+                0x00000000       0x39 ./BaseDriver/peripheral_init.o
  .data          0x00000000        0x0 ./Project_Settings/Startup_Code/startup_S32K142.o
  .bss           0x00000000        0x0 ./Project_Settings/Startup_Code/startup_S32K142.o
  .group         0x00000000        0x8 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
@@ -1760,6 +1839,63 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./src/main.o
  .debug_macro   0x00000000       0xc4 ./src/main.o
  .debug_macro   0x00000000       0x40 ./src/main.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/motor_control.o
+ .text          0x00000000        0x0 ./src/motor_control.o
+ .data          0x00000000        0x0 ./src/motor_control.o
+ .bss           0x00000000        0x0 ./src/motor_control.o
+ .text.pause    0x00000000       0x1c ./src/motor_control.o
+ .text.MC_enable_PWM
+                0x00000000       0x38 ./src/motor_control.o
+ .text.MC_disable_PWM
+                0x00000000       0x3c ./src/motor_control.o
+ .debug_macro   0x00000000      0x8d4 ./src/motor_control.o
+ .debug_macro   0x00000000       0x16 ./src/motor_control.o
+ .debug_macro   0x00000000       0x22 ./src/motor_control.o
+ .debug_macro   0x00000000       0x4f ./src/motor_control.o
+ .debug_macro   0x00000000       0x51 ./src/motor_control.o
+ .debug_macro   0x00000000       0xef ./src/motor_control.o
+ .debug_macro   0x00000000       0x6a ./src/motor_control.o
+ .debug_macro   0x00000000      0x1df ./src/motor_control.o
+ .debug_macro   0x00000000     0xeedc ./src/motor_control.o
+ .debug_macro   0x00000000       0x22 ./src/motor_control.o
+ .debug_macro   0x00000000       0x46 ./src/motor_control.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .group         0x00000000        0x8 ./src/pwm_isr.o
+ .text          0x00000000        0x0 ./src/pwm_isr.o
+ .data          0x00000000        0x0 ./src/pwm_isr.o
+ .bss           0x00000000        0x0 ./src/pwm_isr.o
+ .debug_macro   0x00000000      0x8d4 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x16 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x22 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x4f ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x51 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0xef ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x6a ./src/pwm_isr.o
+ .debug_macro   0x00000000      0x1df ./src/pwm_isr.o
+ .debug_macro   0x00000000     0xeedc ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x22 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x22 ./src/pwm_isr.o
+ .debug_macro   0x00000000       0x46 ./src/pwm_isr.o
  .data          0x00000000        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x00000000        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
  .data          0x00000000        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
@@ -1793,6 +1929,9 @@ Discarded input sections
  .debug_frame   0x00000000       0x2c C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
  .ARM.attributes
                 0x00000000       0x34 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+ .text          0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
  .text          0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memset.o)
  .data          0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memset.o)
  .bss           0x00000000        0x0 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memset.o)
@@ -1842,7 +1981,9 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
 LOAD C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 LOAD ./BaseDriver/Gpio.o
 LOAD ./BaseDriver/Timer.o
+LOAD ./BaseDriver/adc.o
 LOAD ./BaseDriver/lpuart_LPUART_0.o
+LOAD ./BaseDriver/peripheral_init.o
 LOAD ./Project_Settings/Startup_Code/startup_S32K142.o
 LOAD ./SDK/platform/devices/S32K142/startup/system_S32K142.o
 LOAD ./SDK/platform/devices/startup.o
@@ -1874,6 +2015,8 @@ LOAD ./board/peripherals_timing_pal_3.o
 LOAD ./board/pin_mux.o
 LOAD ./src/e-bike_app.o
 LOAD ./src/main.o
+LOAD ./src/motor_control.o
+LOAD ./src/pwm_isr.o
 START GROUP
 LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a
 LOAD C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a
@@ -1910,7 +2053,7 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
  .FlashConfig   0x00000400       0x10 ./Project_Settings/Startup_Code/startup_S32K142.o
                 0x00000410                . = ALIGN (0x4)
 
-.text           0x00000410     0x5464
+.text           0x00000410     0x5bcc
                 0x00000410                . = ALIGN (0x4)
  *(.text)
  .text          0x00000410       0x6c ./Project_Settings/Startup_Code/startup_S32K142.o
@@ -1976,7 +2119,6 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
                 0x00000478                FTM1_Ch6_Ch7_IRQHandler
                 0x00000478                Reserved105_IRQHandler
                 0x00000478                FTM1_Ch4_Ch5_IRQHandler
-                0x00000478                FTM3_Ovf_Reload_IRQHandler
                 0x00000478                LPSPI0_IRQHandler
                 0x00000478                WDOG_EWM_IRQHandler
                 0x00000478                MemManage_Handler
@@ -2545,110 +2687,141 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
  *fill*         0x00005506        0x2 
  .text.main     0x00005508       0x34 ./src/main.o
                 0x00005508                main
+ .text.Init_Motor_Control
+                0x0000553c       0x7c ./src/motor_control.o
+                0x0000553c                Init_Motor_Control
+ .text.MC_do_speed_control
+                0x000055b8       0x70 ./src/motor_control.o
+                0x000055b8                MC_do_speed_control
+ .text.MC_Set_Speed
+                0x00005628       0x2c ./src/motor_control.o
+                0x00005628                MC_Set_Speed
+ .text.isin     0x00005654       0x3c ./src/motor_control.o
+                0x00005654                isin
+ .text.recip_sqrt
+                0x00005690       0x58 ./src/motor_control.o
+                0x00005690                recip_sqrt
+ .text.limit_magnitude
+                0x000056e8       0x74 ./src/motor_control.o
+                0x000056e8                limit_magnitude
+ .text.MC_do_position
+                0x0000575c       0xe8 ./src/motor_control.o
+                0x0000575c                MC_do_position
+ .text.MC_do_current_control
+                0x00005844      0x1bc ./src/motor_control.o
+                0x00005844                MC_do_current_control
+ .text.FTM3_Ovf_Reload_IRQHandler
+                0x00005a00      0x27c ./src/pwm_isr.o
+                0x00005a00                FTM3_Ovf_Reload_IRQHandler
+ .text.memcpy   0x00005c7c       0x16 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
+                0x00005c7c                memcpy
  *(.rodata)
  *(.rodata*)
+ *fill*         0x00005c92        0x2 
  .rodata.lpUartInitConfig1
-                0x0000553c        0xc ./BaseDriver/lpuart_LPUART_0.o
-                0x0000553c                lpUartInitConfig1
+                0x00005c94        0xc ./BaseDriver/lpuart_LPUART_0.o
+                0x00005c94                lpUartInitConfig1
  .rodata.clockNameMappings
-                0x00005548       0x98 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
-                0x00005548                clockNameMappings
+                0x00005ca0       0x98 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00005ca0                clockNameMappings
  .rodata.maxSysClksInHSRUN.7652
-                0x000055e0       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00005d38       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
  .rodata.maxSysClksInRUN.7651
-                0x00005634       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00005d8c       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
  .rodata.maxSysClksInVLPR.7650
-                0x00005688       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00005de0       0x54 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
  .rodata.peripheralFeaturesList
-                0x000056dc       0x4c ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
-                0x000056dc                peripheralFeaturesList
+                0x00005e34       0x4c ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00005e34                peripheralFeaturesList
  .rodata.g_ftmBase
-                0x00005728       0x10 ./SDK/platform/drivers/src/ftm/ftm_common.o
-                0x00005728                g_ftmBase
+                0x00005e80       0x10 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005e80                g_ftmBase
  .rodata.g_ftmExtClockSel
-                0x00005738        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005e90        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
  .rodata.g_ftmFaultIrqId
-                0x0000573c        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
-                0x0000573c                g_ftmFaultIrqId
+                0x00005e94        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005e94                g_ftmFaultIrqId
  .rodata.g_ftmIrqId
-                0x00005740       0x20 ./SDK/platform/drivers/src/ftm/ftm_common.o
-                0x00005740                g_ftmIrqId
+                0x00005e98       0x20 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005e98                g_ftmIrqId
  .rodata.g_ftmOverflowIrqId
-                0x00005760        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
-                0x00005760                g_ftmOverflowIrqId
+                0x00005eb8        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005eb8                g_ftmOverflowIrqId
  .rodata.g_ftmReloadIrqId
-                0x00005764        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
-                0x00005764                g_ftmReloadIrqId
+                0x00005ebc        0x4 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00005ebc                g_ftmReloadIrqId
  .rodata.s_lpuartBase
-                0x00005768        0x8 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+                0x00005ec0        0x8 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
  .rodata.s_lpuartClkNames
-                0x00005770        0x2 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- *fill*         0x00005772        0x2 
+                0x00005ec8        0x2 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ *fill*         0x00005eca        0x2 
  .rodata.s_lpuartRxTxIrqId
-                0x00005774        0x2 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- *fill*         0x00005776        0x2 
+                0x00005ecc        0x2 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ *fill*         0x00005ece        0x2 
  .rodata.s_timingOverFtmIsr
-                0x00005778       0x80 ./SDK/platform/pal/src/timing/timing_irq.o
-                0x00005778                s_timingOverFtmIsr
+                0x00005ed0       0x80 ./SDK/platform/pal/src/timing/timing_irq.o
+                0x00005ed0                s_timingOverFtmIsr
  .rodata.ftmBase
-                0x000057f8       0x10 ./SDK/platform/pal/src/timing/timing_pal.o
-                0x000057f8                ftmBase
+                0x00005f50       0x10 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x00005f50                ftmBase
  .rodata.s_ftmIrq
-                0x00005808       0x20 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x00005f60       0x20 ./SDK/platform/pal/src/timing/timing_pal.o
  .rodata.s_lpitIrq
-                0x00005828        0x4 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x00005f80        0x4 ./SDK/platform/pal/src/timing/timing_pal.o
  .rodata.timingLpitInst0
-                0x0000582c        0x8 ./board/peripherals_timing_pal_1.o
-                0x0000582c                timingLpitInst0
+                0x00005f84        0x8 ./board/peripherals_timing_pal_1.o
+                0x00005f84                timingLpitInst0
  .rodata.timingLpitInst0_chanConfig
-                0x00005834        0xc ./board/peripherals_timing_pal_1.o
-                0x00005834                timingLpitInst0_chanConfig
+                0x00005f8c        0xc ./board/peripherals_timing_pal_1.o
+                0x00005f8c                timingLpitInst0_chanConfig
  .rodata.timingLpit_InitConfig0
-                0x00005840        0xc ./board/peripherals_timing_pal_1.o
-                0x00005840                timingLpit_InitConfig0
+                0x00005f98        0xc ./board/peripherals_timing_pal_1.o
+                0x00005f98                timingLpit_InitConfig0
  .rodata.timingLptmrInst0
-                0x0000584c        0x8 ./board/peripherals_timing_pal_2.o
-                0x0000584c                timingLptmrInst0
+                0x00005fa4        0x8 ./board/peripherals_timing_pal_2.o
+                0x00005fa4                timingLptmrInst0
  .rodata.timingLptmrInst0_chanConfig
-                0x00005854        0xc ./board/peripherals_timing_pal_2.o
-                0x00005854                timingLptmrInst0_chanConfig
+                0x00005fac        0xc ./board/peripherals_timing_pal_2.o
+                0x00005fac                timingLptmrInst0_chanConfig
  .rodata.timingLptmr_InitConfig0
-                0x00005860        0xc ./board/peripherals_timing_pal_2.o
-                0x00005860                timingLptmr_InitConfig0
+                0x00005fb8        0xc ./board/peripherals_timing_pal_2.o
+                0x00005fb8                timingLptmr_InitConfig0
+ .rodata.hall_to_theta
+                0x00005fc4       0x10 ./src/motor_control.o
  *(.init)
- .init          0x0000586c        0x4 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x0000586c                _init
+ .init          0x00005fd4        0x4 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x00005fd4                _init
  *(.fini)
- .fini          0x00005870        0x4 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00005870                _fini
+ .fini          0x00005fd8        0x4 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x00005fd8                _fini
  *(.eh_frame)
-                0x00005874                . = ALIGN (0x4)
+                0x00005fdc                . = ALIGN (0x4)
 
-.glue_7         0x00005874        0x0
- .glue_7        0x00005874        0x0 linker stubs
+.glue_7         0x00005fdc        0x0
+ .glue_7        0x00005fdc        0x0 linker stubs
 
-.glue_7t        0x00005874        0x0
- .glue_7t       0x00005874        0x0 linker stubs
+.glue_7t        0x00005fdc        0x0
+ .glue_7t       0x00005fdc        0x0 linker stubs
 
-.vfp11_veneer   0x00005874        0x0
- .vfp11_veneer  0x00005874        0x0 linker stubs
+.vfp11_veneer   0x00005fdc        0x0
+ .vfp11_veneer  0x00005fdc        0x0 linker stubs
 
-.v4_bx          0x00005874        0x0
- .v4_bx         0x00005874        0x0 linker stubs
+.v4_bx          0x00005fdc        0x0
+ .v4_bx         0x00005fdc        0x0 linker stubs
 
-.iplt           0x00005874        0x0
- .iplt          0x00005874        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x00005fdc        0x0
+ .iplt          0x00005fdc        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.ARM            0x00005874        0x8
-                0x00005874                __exidx_start = .
+.ARM            0x00005fdc        0x8
+                0x00005fdc                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x00005874        0x8 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
-                0x0000587c                __exidx_end = .
-                0x0000587c                __etext = .
-                0x0000587c                __DATA_ROM = .
+ .ARM.exidx     0x00005fdc        0x8 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
+                0x00005fe4                __exidx_end = .
+                0x00005fe4                __etext = .
+                0x00005fe4                __DATA_ROM = .
 
-.rel.dyn        0x0000587c        0x0
- .rel.iplt      0x0000587c        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x00005fe4        0x0
+ .rel.iplt      0x00005fe4        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
 .interrupts_ram
                 0x1fffc000      0x400
@@ -2664,7 +2837,7 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
                 0x1fffc000                __VECTOR_RAM = DEFINED (__flash_vector_table__)?ORIGIN (m_interrupts):__VECTOR_RAM__
                 0x00000400                __RAM_VECTOR_TABLE_SIZE = DEFINED (__flash_vector_table__)?0x0:(__interrupts_ram_end__ - __interrupts_ram_start__)
 
-.data           0x1fffc400      0x284 load address 0x0000587c
+.data           0x1fffc400      0x2a8 load address 0x00005fe4
                 0x1fffc400                . = ALIGN (0x4)
                 0x1fffc400                __DATA_RAM = .
                 0x1fffc400                __data_start__ = .
@@ -2697,35 +2870,38 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
  .data.g_pin_mux_InitConfigArr0
                 0x1fffc5c4       0xc0 ./board/pin_mux.o
                 0x1fffc5c4                g_pin_mux_InitConfigArr0
-                0x1fffc684                . = ALIGN (0x4)
-                0x1fffc684                __data_end__ = .
-                0x00005b00                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
-                0x00005b00                __CODE_ROM = __DATA_END
+ .data.ADC0_channels
+                0x1fffc684       0x24 ./src/pwm_isr.o
+                0x1fffc684                ADC0_channels
+                0x1fffc6a8                . = ALIGN (0x4)
+                0x1fffc6a8                __data_end__ = .
+                0x0000628c                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+                0x0000628c                __CODE_ROM = __DATA_END
 
-.igot.plt       0x1fffc684        0x0 load address 0x00005b00
- .igot.plt      0x1fffc684        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.igot.plt       0x1fffc6a8        0x0 load address 0x0000628c
+ .igot.plt      0x1fffc6a8        0x0 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.code           0x1fffc684        0x0 load address 0x00005b00
-                0x1fffc684                . = ALIGN (0x4)
-                0x1fffc684                __CODE_RAM = .
-                0x1fffc684                __code_start__ = .
-                0x1fffc684                __code_ram_start__ = .
+.code           0x1fffc6a8        0x0 load address 0x0000628c
+                0x1fffc6a8                . = ALIGN (0x4)
+                0x1fffc6a8                __CODE_RAM = .
+                0x1fffc6a8                __code_start__ = .
+                0x1fffc6a8                __code_ram_start__ = .
  *(.code_ram)
-                0x1fffc684                . = ALIGN (0x4)
-                0x1fffc684                __code_end__ = .
-                0x1fffc684                __code_ram_end__ = .
-                0x00005b00                __CODE_END = (__CODE_ROM + (__code_end__ - __code_start__))
-                0x00005b00                __CUSTOM_ROM = __CODE_END
+                0x1fffc6a8                . = ALIGN (0x4)
+                0x1fffc6a8                __code_end__ = .
+                0x1fffc6a8                __code_ram_end__ = .
+                0x0000628c                __CODE_END = (__CODE_ROM + (__code_end__ - __code_start__))
+                0x0000628c                __CUSTOM_ROM = __CODE_END
 
 .customSectionBlock
-                0x20000000        0x0 load address 0x00005b00
+                0x20000000        0x0 load address 0x0000628c
                 0x20000000                __customSection_start__ = .
  *(.customSection)
                 0x20000000                __customSection_end__ = .
-                0x00005b00                __CUSTOM_END = (__CUSTOM_ROM + (__customSection_end__ - __customSection_start__))
-                0x00005b00                __rom_end = __CUSTOM_END
+                0x0000628c                __CUSTOM_END = (__CUSTOM_ROM + (__customSection_end__ - __customSection_start__))
+                0x0000628c                __rom_end = __CUSTOM_END
 
-.bss            0x20000000      0x82c
+.bss            0x20000000      0x91c
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                __BSS_START = .
                 0x20000000                __bss_start__ = .
@@ -2772,63 +2948,83 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
  .bss.g_clockManCallbacksArr
                 0x20000550        0x4 ./board/clock_config.o
                 0x20000550                g_clockManCallbacksArr
+ .bss.a.6145    0x20000554        0x2 ./src/pwm_isr.o
+ *fill*         0x20000556        0x2 
+ .bss.adc_reader
+                0x20000558        0x4 ./src/pwm_isr.o
+                0x20000558                adc_reader
+ .bss.x.6138    0x2000055c        0x2 ./src/pwm_isr.o
+ .bss.x.6144    0x2000055e        0x2 ./src/pwm_isr.o
  *(COMMON)
- COMMON         0x20000554       0x14 ./BaseDriver/Gpio.o
-                0x20000554                s2_scan
-                0x20000556                s2_Falling
-                0x20000558                s2_ap_ll
-                0x2000055a                s2_Rising
-                0x2000055c                s2_8ms
-                0x2000055e                s2_ap
-                0x20000560                key_info
- COMMON         0x20000568        0xc ./BaseDriver/Timer.o
-                0x20000568                timer_500us
-                0x2000056c                timer_10us
-                0x20000570                LED_4ms
- COMMON         0x20000574      0x239 ./BaseDriver/lpuart_LPUART_0.o
-                0x20000574                tx0_2ms
-                0x20000578                tx0_buf
-                0x20000678                tr0_buf
-                0x20000778                lpUartState1
-                0x200007ac                tr0_2ms
- *fill*         0x200007ad        0x3 
- COMMON         0x200007b0       0x14 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
-                0x200007b0                g_xtal0ClkFreq
-                0x200007b4                g_RtcClkInFreq
-                0x200007b8                g_TClkFreq
- COMMON         0x200007c4       0x20 ./SDK/platform/pal/src/timing/timing_pal.o
-                0x200007c4                g_ftmChannelRunning
- COMMON         0x200007e4       0x46 ./src/e-bike_app.o
-                0x200007e4                Speed_Value_lst
-                0x200007e6                Candence_Out_500us
-                0x200007e8                hallcode
-                0x200007ec                Speed_Mil_Hr
-                0x200007f0                Speed_Cnt_500us
-                0x200007f2                Candence_Out_Value
-                0x200007f4                Speed_Value
-                0x200007f6                MT_State
-                0x200007f8                Candence_In_Value
-                0x200007fc                EB_APP_ST
-                0x20000828                Candence_In_500us
-                0x2000082c                . = ALIGN (0x4)
- *fill*         0x2000082a        0x2 
-                0x2000082c                __bss_end__ = .
-                0x2000082c                __BSS_END = .
+ COMMON         0x20000560       0x14 ./BaseDriver/Gpio.o
+                0x20000560                s2_scan
+                0x20000562                s2_Falling
+                0x20000564                s2_ap_ll
+                0x20000566                s2_Rising
+                0x20000568                s2_8ms
+                0x2000056a                s2_ap
+                0x2000056c                key_info
+ COMMON         0x20000574        0xc ./BaseDriver/Timer.o
+                0x20000574                timer_500us
+                0x20000578                timer_10us
+                0x2000057c                LED_4ms
+ COMMON         0x20000580       0x4a ./BaseDriver/adc.o
+                0x20000580                ADC_filter_state
+                0x200005a4                ADC_results
+                0x200005b8                ADC_filtered
+ *fill*         0x200005ca        0x2 
+ COMMON         0x200005cc      0x239 ./BaseDriver/lpuart_LPUART_0.o
+                0x200005cc                tx0_2ms
+                0x200005d0                tx0_buf
+                0x200006d0                tr0_buf
+                0x200007d0                lpUartState1
+                0x20000804                tr0_2ms
+ *fill*         0x20000805        0x3 
+ COMMON         0x20000808       0x14 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x20000808                g_xtal0ClkFreq
+                0x2000080c                g_RtcClkInFreq
+                0x20000810                g_TClkFreq
+ COMMON         0x2000081c       0x20 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x2000081c                g_ftmChannelRunning
+ COMMON         0x2000083c       0x46 ./src/e-bike_app.o
+                0x2000083c                Speed_Value_lst
+                0x2000083e                Candence_Out_500us
+                0x20000840                hallcode
+                0x20000844                Speed_Mil_Hr
+                0x20000848                Speed_Cnt_500us
+                0x2000084a                Candence_Out_Value
+                0x2000084c                Speed_Value
+                0x2000084e                MT_State
+                0x20000850                Candence_In_Value
+                0x20000854                EB_APP_ST
+                0x20000880                Candence_In_500us
+ *fill*         0x20000882        0x2 
+ COMMON         0x20000884       0x90 ./src/motor_control.o
+                0x20000884                M1A
+                0x20000888                M1B
+                0x2000088c                M1
+                0x200008d0                M2
+ COMMON         0x20000914        0x8 ./src/pwm_isr.o
+                0x20000914                pot2
+                0x20000918                pot1
+                0x2000091c                . = ALIGN (0x4)
+                0x2000091c                __bss_end__ = .
+                0x2000091c                __BSS_END = .
 
-.heap           0x2000082c      0x404
-                0x20000830                . = ALIGN (0x8)
- *fill*         0x2000082c        0x4 
-                0x20000830                __end__ = .
-                0x20000830                __heap_start__ = .
+.heap           0x2000091c      0x404
+                0x20000920                . = ALIGN (0x8)
+ *fill*         0x2000091c        0x4 
+                0x20000920                __end__ = .
+                0x20000920                __heap_start__ = .
                 [!provide]                PROVIDE (end, .)
                 [!provide]                PROVIDE (_end, .)
                 [!provide]                PROVIDE (__end, .)
-                0x20000830                __HeapBase = .
-                0x20000c30                . = (. + HEAP_SIZE)
- *fill*         0x20000830      0x400 
-                0x20000c30                __HeapLimit = .
-                0x20000c30                __heap_limit = .
-                0x20000c30                __heap_end__ = .
+                0x20000920                __HeapBase = .
+                0x20000d20                . = (. + HEAP_SIZE)
+ *fill*         0x20000920      0x400 
+                0x20000d20                __HeapLimit = .
+                0x20000d20                __heap_limit = .
+                0x20000d20                __heap_end__ = .
                 0x20003000                __StackTop = (ORIGIN (m_data_2) + LENGTH (m_data_2))
                 0x20002c00                __StackLimit = (__StackTop - STACK_SIZE)
                 0x20003000                PROVIDE (__stack, __StackTop)
@@ -2851,232 +3047,255 @@ LOAD c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../
  .ARM.attributes
                 0x0000005b       0x39 ./BaseDriver/Timer.o
  .ARM.attributes
-                0x00000094       0x39 ./BaseDriver/lpuart_LPUART_0.o
+                0x00000094       0x39 ./BaseDriver/adc.o
  .ARM.attributes
-                0x000000cd       0x1f ./Project_Settings/Startup_Code/startup_S32K142.o
+                0x000000cd       0x39 ./BaseDriver/lpuart_LPUART_0.o
  .ARM.attributes
-                0x000000ec       0x39 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+                0x00000106       0x1f ./Project_Settings/Startup_Code/startup_S32K142.o
  .ARM.attributes
-                0x00000125       0x39 ./SDK/platform/devices/startup.o
+                0x00000125       0x39 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
  .ARM.attributes
-                0x0000015e       0x39 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x0000015e       0x39 ./SDK/platform/devices/startup.o
  .ARM.attributes
-                0x00000197       0x39 ./SDK/platform/drivers/src/edma/edma_driver.o
+                0x00000197       0x39 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
  .ARM.attributes
-                0x000001d0       0x39 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+                0x000001d0       0x39 ./SDK/platform/drivers/src/edma/edma_driver.o
  .ARM.attributes
-                0x00000209       0x39 ./SDK/platform/drivers/src/edma/edma_irq.o
+                0x00000209       0x39 ./SDK/platform/drivers/src/edma/edma_hw_access.o
  .ARM.attributes
-                0x00000242       0x39 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x00000242       0x39 ./SDK/platform/drivers/src/edma/edma_irq.o
  .ARM.attributes
-                0x0000027b       0x39 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+                0x0000027b       0x39 ./SDK/platform/drivers/src/ftm/ftm_common.o
  .ARM.attributes
-                0x000002b4       0x39 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+                0x000002b4       0x39 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
  .ARM.attributes
-                0x000002ed       0x39 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+                0x000002ed       0x39 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
  .ARM.attributes
-                0x00000326       0x39 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+                0x00000326       0x39 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
  .ARM.attributes
-                0x0000035f       0x39 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+                0x0000035f       0x39 ./SDK/platform/drivers/src/lpit/lpit_driver.o
  .ARM.attributes
-                0x00000398       0x39 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+                0x00000398       0x39 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
  .ARM.attributes
-                0x000003d1       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+                0x000003d1       0x39 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
  .ARM.attributes
-                0x0000040a       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+                0x0000040a       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
  .ARM.attributes
-                0x00000443       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+                0x00000443       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
  .ARM.attributes
-                0x0000047c       0x39 ./SDK/platform/drivers/src/pins/pins_driver.o
+                0x0000047c       0x39 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
  .ARM.attributes
-                0x000004b5       0x39 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+                0x000004b5       0x39 ./SDK/platform/drivers/src/pins/pins_driver.o
  .ARM.attributes
-                0x000004ee       0x39 ./SDK/platform/pal/src/timing/timing_irq.o
+                0x000004ee       0x39 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
  .ARM.attributes
-                0x00000527       0x39 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x00000527       0x39 ./SDK/platform/pal/src/timing/timing_irq.o
  .ARM.attributes
-                0x00000560       0x39 ./SDK/rtos/osif/osif_baremetal.o
+                0x00000560       0x39 ./SDK/platform/pal/src/timing/timing_pal.o
  .ARM.attributes
-                0x00000599       0x39 ./board/clock_config.o
+                0x00000599       0x39 ./SDK/rtos/osif/osif_baremetal.o
  .ARM.attributes
-                0x000005d2       0x39 ./board/peripherals_timing_pal_1.o
+                0x000005d2       0x39 ./board/clock_config.o
  .ARM.attributes
-                0x0000060b       0x39 ./board/peripherals_timing_pal_2.o
+                0x0000060b       0x39 ./board/peripherals_timing_pal_1.o
  .ARM.attributes
-                0x00000644       0x39 ./board/pin_mux.o
+                0x00000644       0x39 ./board/peripherals_timing_pal_2.o
  .ARM.attributes
-                0x0000067d       0x39 ./src/e-bike_app.o
+                0x0000067d       0x39 ./board/pin_mux.o
  .ARM.attributes
-                0x000006b6       0x39 ./src/main.o
+                0x000006b6       0x39 ./src/e-bike_app.o
  .ARM.attributes
-                0x000006ef       0x22 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
+                0x000006ef       0x39 ./src/main.o
  .ARM.attributes
-                0x00000711       0x34 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
+                0x00000728       0x39 ./src/motor_control.o
  .ARM.attributes
-                0x00000745       0x22 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_dvmd_tls.o)
+                0x00000761       0x39 ./src/pwm_isr.o
+ .ARM.attributes
+                0x0000079a       0x22 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x000007bc       0x34 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x000007f0       0x22 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000812       0x34 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
                 0x00000001                ASSERT ((__rom_end <= (ORIGIN (m_text) + LENGTH (m_text))), Region m_text overflowed!)
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data_2 overflowed with stack and heap)
 OUTPUT(EBike_Main.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x33f62
+.debug_info     0x00000000    0x35667
  .debug_info    0x00000000     0x31d4 ./BaseDriver/Gpio.o
  .debug_info    0x000031d4     0x3163 ./BaseDriver/Timer.o
- .debug_info    0x00006337      0x863 ./BaseDriver/lpuart_LPUART_0.o
- .debug_info    0x00006b9a       0x26 ./Project_Settings/Startup_Code/startup_S32K142.o
- .debug_info    0x00006bc0      0x525 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_info    0x000070e5      0x2b1 ./SDK/platform/devices/startup.o
- .debug_info    0x00007396     0x6366 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_info    0x0000d6fc     0x4853 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_info    0x00011f4f      0xa56 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_info    0x000129a5      0x6de ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_info    0x00013083     0x308a ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_info    0x0001610d      0xa0c ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_info    0x00016b19     0x1655 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_info    0x0001816e      0xc7e ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_info    0x00018dec     0x2110 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_info    0x0001aefc     0x293f ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_info    0x0001d83b      0x150 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_info    0x0001d98b     0x3732 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_info    0x000210bd      0x9bf ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_info    0x00021a7c      0x106 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_info    0x00021b82     0x14bb ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_info    0x0002303d      0x9a9 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_info    0x000239e6     0x14ee ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_info    0x00024ed4     0x311b ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_info    0x00027fef      0xbc0 ./SDK/rtos/osif/osif_baremetal.o
- .debug_info    0x00028baf     0x12a7 ./board/clock_config.o
- .debug_info    0x00029e56      0x91b ./board/peripherals_timing_pal_1.o
- .debug_info    0x0002a771      0xa13 ./board/peripherals_timing_pal_2.o
- .debug_info    0x0002b184     0x2e79 ./board/pin_mux.o
- .debug_info    0x0002dffd     0x3015 ./src/e-bike_app.o
- .debug_info    0x00031012     0x2f50 ./src/main.o
+ .debug_info    0x00006337      0x35c ./BaseDriver/adc.o
+ .debug_info    0x00006693      0x863 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_info    0x00006ef6       0x26 ./Project_Settings/Startup_Code/startup_S32K142.o
+ .debug_info    0x00006f1c      0x525 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_info    0x00007441      0x2b1 ./SDK/platform/devices/startup.o
+ .debug_info    0x000076f2     0x6366 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_info    0x0000da58     0x4853 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_info    0x000122ab      0xa56 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_info    0x00012d01      0x6de ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_info    0x000133df     0x308a ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_info    0x00016469      0xa0c ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_info    0x00016e75     0x1655 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_info    0x000184ca      0xc7e ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_info    0x00019148     0x2110 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_info    0x0001b258     0x293f ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_info    0x0001db97      0x150 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_info    0x0001dce7     0x3732 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_info    0x00021419      0x9bf ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_info    0x00021dd8      0x106 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_info    0x00021ede     0x14bb ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_info    0x00023399      0x9a9 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_info    0x00023d42     0x14ee ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_info    0x00025230     0x311b ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_info    0x0002834b      0xbc0 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_info    0x00028f0b     0x12a7 ./board/clock_config.o
+ .debug_info    0x0002a1b2      0x91b ./board/peripherals_timing_pal_1.o
+ .debug_info    0x0002aacd      0xa13 ./board/peripherals_timing_pal_2.o
+ .debug_info    0x0002b4e0     0x2e79 ./board/pin_mux.o
+ .debug_info    0x0002e359     0x3015 ./src/e-bike_app.o
+ .debug_info    0x0003136e     0x2f50 ./src/main.o
+ .debug_info    0x000342be      0xa00 ./src/motor_control.o
+ .debug_info    0x00034cbe      0x9a9 ./src/pwm_isr.o
 
-.debug_abbrev   0x00000000     0x45d6
+.debug_abbrev   0x00000000     0x4ac8
  .debug_abbrev  0x00000000      0x263 ./BaseDriver/Gpio.o
  .debug_abbrev  0x00000263      0x325 ./BaseDriver/Timer.o
- .debug_abbrev  0x00000588      0x182 ./BaseDriver/lpuart_LPUART_0.o
- .debug_abbrev  0x0000070a       0x14 ./Project_Settings/Startup_Code/startup_S32K142.o
- .debug_abbrev  0x0000071e      0x143 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_abbrev  0x00000861       0xe3 ./SDK/platform/devices/startup.o
- .debug_abbrev  0x00000944      0x40b ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_abbrev  0x00000d4f      0x414 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_abbrev  0x00001163      0x242 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_abbrev  0x000013a5      0x1bb ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_abbrev  0x00001560      0x39c ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_abbrev  0x000018fc      0x1e2 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_abbrev  0x00001ade      0x297 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_abbrev  0x00001d75      0x27a ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_abbrev  0x00001fef      0x390 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_abbrev  0x0000237f      0x36a ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_abbrev  0x000026e9       0xe6 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_abbrev  0x000027cf      0x3ad ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_abbrev  0x00002b7c      0x1ef ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_abbrev  0x00002d6b       0xbc ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_abbrev  0x00002e27      0x2f8 ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_abbrev  0x0000311f      0x234 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_abbrev  0x00003353      0x20b ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_abbrev  0x0000355e      0x3c9 ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_abbrev  0x00003927      0x2e1 ./SDK/rtos/osif/osif_baremetal.o
- .debug_abbrev  0x00003c08      0x125 ./board/clock_config.o
- .debug_abbrev  0x00003d2d      0x13f ./board/peripherals_timing_pal_1.o
- .debug_abbrev  0x00003e6c      0x13f ./board/peripherals_timing_pal_2.o
- .debug_abbrev  0x00003fab      0x1dc ./board/pin_mux.o
- .debug_abbrev  0x00004187      0x209 ./src/e-bike_app.o
- .debug_abbrev  0x00004390      0x246 ./src/main.o
+ .debug_abbrev  0x00000588       0xfe ./BaseDriver/adc.o
+ .debug_abbrev  0x00000686      0x182 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_abbrev  0x00000808       0x14 ./Project_Settings/Startup_Code/startup_S32K142.o
+ .debug_abbrev  0x0000081c      0x143 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_abbrev  0x0000095f       0xe3 ./SDK/platform/devices/startup.o
+ .debug_abbrev  0x00000a42      0x40b ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_abbrev  0x00000e4d      0x414 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_abbrev  0x00001261      0x242 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_abbrev  0x000014a3      0x1bb ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_abbrev  0x0000165e      0x39c ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_abbrev  0x000019fa      0x1e2 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_abbrev  0x00001bdc      0x297 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_abbrev  0x00001e73      0x27a ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_abbrev  0x000020ed      0x390 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_abbrev  0x0000247d      0x36a ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_abbrev  0x000027e7       0xe6 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_abbrev  0x000028cd      0x3ad ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_abbrev  0x00002c7a      0x1ef ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_abbrev  0x00002e69       0xbc ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_abbrev  0x00002f25      0x2f8 ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_abbrev  0x0000321d      0x234 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_abbrev  0x00003451      0x20b ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_abbrev  0x0000365c      0x3c9 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_abbrev  0x00003a25      0x2e1 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_abbrev  0x00003d06      0x125 ./board/clock_config.o
+ .debug_abbrev  0x00003e2b      0x13f ./board/peripherals_timing_pal_1.o
+ .debug_abbrev  0x00003f6a      0x13f ./board/peripherals_timing_pal_2.o
+ .debug_abbrev  0x000040a9      0x1dc ./board/pin_mux.o
+ .debug_abbrev  0x00004285      0x209 ./src/e-bike_app.o
+ .debug_abbrev  0x0000448e      0x246 ./src/main.o
+ .debug_abbrev  0x000046d4      0x260 ./src/motor_control.o
+ .debug_abbrev  0x00004934      0x194 ./src/pwm_isr.o
 
-.debug_aranges  0x00000000      0xd70
+.debug_aranges  0x00000000      0xe20
  .debug_aranges
                 0x00000000       0x90 ./BaseDriver/Gpio.o
  .debug_aranges
                 0x00000090       0x58 ./BaseDriver/Timer.o
  .debug_aranges
-                0x000000e8       0x38 ./BaseDriver/lpuart_LPUART_0.o
+                0x000000e8       0x20 ./BaseDriver/adc.o
  .debug_aranges
-                0x00000120       0x20 ./Project_Settings/Startup_Code/startup_S32K142.o
+                0x00000108       0x38 ./BaseDriver/lpuart_LPUART_0.o
  .debug_aranges
-                0x00000140       0x30 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+                0x00000140       0x20 ./Project_Settings/Startup_Code/startup_S32K142.o
  .debug_aranges
-                0x00000170       0x20 ./SDK/platform/devices/startup.o
+                0x00000160       0x30 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
  .debug_aranges
-                0x00000190      0x128 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+                0x00000190       0x20 ./SDK/platform/devices/startup.o
  .debug_aranges
-                0x000002b8      0x140 ./SDK/platform/drivers/src/edma/edma_driver.o
+                0x000001b0      0x128 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
  .debug_aranges
-                0x000003f8       0x88 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+                0x000002d8      0x140 ./SDK/platform/drivers/src/edma/edma_driver.o
  .debug_aranges
-                0x00000480       0xa0 ./SDK/platform/drivers/src/edma/edma_irq.o
+                0x00000418       0x88 ./SDK/platform/drivers/src/edma/edma_hw_access.o
  .debug_aranges
-                0x00000520       0xc8 ./SDK/platform/drivers/src/ftm/ftm_common.o
+                0x000004a0       0xa0 ./SDK/platform/drivers/src/edma/edma_irq.o
  .debug_aranges
-                0x000005e8       0x38 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+                0x00000540       0xc8 ./SDK/platform/drivers/src/ftm/ftm_common.o
  .debug_aranges
-                0x00000620       0x30 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+                0x00000608       0x38 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
  .debug_aranges
-                0x00000650       0x70 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+                0x00000640       0x30 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
  .debug_aranges
-                0x000006c0       0xb0 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+                0x00000670       0x70 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
  .debug_aranges
-                0x00000770       0xa8 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+                0x000006e0       0xb0 ./SDK/platform/drivers/src/lpit/lpit_driver.o
  .debug_aranges
-                0x00000818       0x20 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+                0x00000790       0xa8 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
  .debug_aranges
-                0x00000838      0x118 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+                0x00000838       0x20 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
  .debug_aranges
-                0x00000950       0x78 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+                0x00000858      0x118 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
  .debug_aranges
-                0x000009c8       0x28 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+                0x00000970       0x78 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
  .debug_aranges
-                0x000009f0       0xe0 ./SDK/platform/drivers/src/pins/pins_driver.o
+                0x000009e8       0x28 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
  .debug_aranges
-                0x00000ad0       0x40 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+                0x00000a10       0xe0 ./SDK/platform/drivers/src/pins/pins_driver.o
  .debug_aranges
-                0x00000b10       0xc0 ./SDK/platform/pal/src/timing/timing_irq.o
+                0x00000af0       0x40 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
  .debug_aranges
-                0x00000bd0       0x90 ./SDK/platform/pal/src/timing/timing_pal.o
+                0x00000b30       0xc0 ./SDK/platform/pal/src/timing/timing_irq.o
  .debug_aranges
-                0x00000c60       0x70 ./SDK/rtos/osif/osif_baremetal.o
+                0x00000bf0       0x90 ./SDK/platform/pal/src/timing/timing_pal.o
  .debug_aranges
-                0x00000cd0       0x18 ./board/clock_config.o
+                0x00000c80       0x70 ./SDK/rtos/osif/osif_baremetal.o
  .debug_aranges
-                0x00000ce8       0x18 ./board/peripherals_timing_pal_1.o
+                0x00000cf0       0x18 ./board/clock_config.o
  .debug_aranges
-                0x00000d00       0x18 ./board/peripherals_timing_pal_2.o
+                0x00000d08       0x18 ./board/peripherals_timing_pal_1.o
  .debug_aranges
-                0x00000d18       0x18 ./board/pin_mux.o
+                0x00000d20       0x18 ./board/peripherals_timing_pal_2.o
  .debug_aranges
-                0x00000d30       0x20 ./src/e-bike_app.o
+                0x00000d38       0x18 ./board/pin_mux.o
  .debug_aranges
-                0x00000d50       0x20 ./src/main.o
+                0x00000d50       0x20 ./src/e-bike_app.o
+ .debug_aranges
+                0x00000d70       0x20 ./src/main.o
+ .debug_aranges
+                0x00000d90       0x70 ./src/motor_control.o
+ .debug_aranges
+                0x00000e00       0x20 ./src/pwm_isr.o
 
-.debug_ranges   0x00000000     0x1530
+.debug_ranges   0x00000000     0x15c8
  .debug_ranges  0x00000000       0x80 ./BaseDriver/Gpio.o
  .debug_ranges  0x00000080       0x48 ./BaseDriver/Timer.o
- .debug_ranges  0x000000c8       0x28 ./BaseDriver/lpuart_LPUART_0.o
- .debug_ranges  0x000000f0       0x20 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_ranges  0x00000110       0x10 ./SDK/platform/devices/startup.o
- .debug_ranges  0x00000120      0x468 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_ranges  0x00000588      0x190 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_ranges  0x00000718       0x90 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_ranges  0x000007a8       0x90 ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_ranges  0x00000838      0x230 ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_ranges  0x00000a68       0x28 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_ranges  0x00000a90      0x228 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_ranges  0x00000cb8       0x98 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_ranges  0x00000d50       0xe8 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_ranges  0x00000e38      0x150 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_ranges  0x00000f88       0x10 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_ranges  0x00000f98      0x180 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_ranges  0x00001118       0x68 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_ranges  0x00001180       0x18 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_ranges  0x00001198       0xd0 ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_ranges  0x00001268       0x48 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_ranges  0x000012b0       0xb0 ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_ranges  0x00001360      0x118 ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_ranges  0x00001478       0x98 ./SDK/rtos/osif/osif_baremetal.o
- .debug_ranges  0x00001510       0x10 ./src/e-bike_app.o
- .debug_ranges  0x00001520       0x10 ./src/main.o
+ .debug_ranges  0x000000c8       0x10 ./BaseDriver/adc.o
+ .debug_ranges  0x000000d8       0x28 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_ranges  0x00000100       0x20 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_ranges  0x00000120       0x10 ./SDK/platform/devices/startup.o
+ .debug_ranges  0x00000130      0x468 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_ranges  0x00000598      0x190 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_ranges  0x00000728       0x90 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_ranges  0x000007b8       0x90 ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_ranges  0x00000848      0x230 ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_ranges  0x00000a78       0x28 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_ranges  0x00000aa0      0x228 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_ranges  0x00000cc8       0x98 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_ranges  0x00000d60       0xe8 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_ranges  0x00000e48      0x150 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_ranges  0x00000f98       0x10 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_ranges  0x00000fa8      0x180 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_ranges  0x00001128       0x68 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_ranges  0x00001190       0x18 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_ranges  0x000011a8       0xd0 ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_ranges  0x00001278       0x48 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_ranges  0x000012c0       0xb0 ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_ranges  0x00001370      0x118 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_ranges  0x00001488       0x98 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_ranges  0x00001520       0x10 ./src/e-bike_app.o
+ .debug_ranges  0x00001530       0x10 ./src/main.o
+ .debug_ranges  0x00001540       0x78 ./src/motor_control.o
+ .debug_ranges  0x000015b8       0x10 ./src/pwm_isr.o
 
-.debug_macro    0x00000000    0x22b8f
+.debug_macro    0x00000000    0x22dbd
  .debug_macro   0x00000000      0x2b1 ./BaseDriver/Gpio.o
  .debug_macro   0x000002b1      0x8d4 ./BaseDriver/Gpio.o
  .debug_macro   0x00000b85       0x22 ./BaseDriver/Gpio.o
@@ -3115,145 +3334,159 @@ OUTPUT(EBike_Main.elf elf32-littlearm)
  .debug_macro   0x0001154d       0x40 ./BaseDriver/Gpio.o
  .debug_macro   0x0001158d       0xbe ./BaseDriver/Gpio.o
  .debug_macro   0x0001164b      0x2b1 ./BaseDriver/Timer.o
- .debug_macro   0x000118fc      0x108 ./BaseDriver/lpuart_LPUART_0.o
- .debug_macro   0x00011a04       0x16 ./BaseDriver/lpuart_LPUART_0.o
- .debug_macro   0x00011a1a     0xeedc ./BaseDriver/lpuart_LPUART_0.o
- .debug_macro   0x000208f6       0xb5 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_macro   0x000209ab       0x28 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_macro   0x000209d3       0xb6 ./SDK/platform/devices/startup.o
- .debug_macro   0x00020a89       0x40 ./SDK/platform/devices/startup.o
- .debug_macro   0x00020ac9      0x2af ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_macro   0x00020d78       0x16 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_macro   0x00020d8e       0xf7 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_macro   0x00020e85       0x10 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_macro   0x00020e95       0xcc ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_macro   0x00020f61       0xd0 ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_macro   0x00021031      0x10d ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_macro   0x0002113e      0x106 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_macro   0x00021244      0x11b ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_macro   0x0002135f       0xc9 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_macro   0x00021428       0xf7 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_macro   0x0002151f       0xf0 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_macro   0x0002160f       0xc7 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_macro   0x000216d6      0x130 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_macro   0x00021806       0x34 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_macro   0x0002183a      0x108 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_macro   0x00021942       0xc0 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_macro   0x00021a02       0xdd ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_macro   0x00021adf       0xdd ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_macro   0x00021bbc      0x130 ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_macro   0x00021cec      0x170 ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_macro   0x00021e5c       0xfb ./SDK/rtos/osif/osif_baremetal.o
- .debug_macro   0x00021f57       0xd8 ./board/clock_config.o
- .debug_macro   0x0002202f      0x128 ./board/peripherals_timing_pal_1.o
- .debug_macro   0x00022157      0x128 ./board/peripherals_timing_pal_2.o
- .debug_macro   0x0002227f      0x2ba ./board/pin_mux.o
- .debug_macro   0x00022539      0x2b1 ./src/e-bike_app.o
- .debug_macro   0x000227ea       0xc4 ./src/e-bike_app.o
- .debug_macro   0x000228ae       0x3a ./src/e-bike_app.o
- .debug_macro   0x000228e8      0x2a7 ./src/main.o
+ .debug_macro   0x000118fc       0x7a ./BaseDriver/adc.o
+ .debug_macro   0x00011976       0x16 ./BaseDriver/adc.o
+ .debug_macro   0x0001198c     0xeedc ./BaseDriver/adc.o
+ .debug_macro   0x00020868       0x22 ./BaseDriver/adc.o
+ .debug_macro   0x0002088a      0x108 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_macro   0x00020992       0xb5 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_macro   0x00020a47       0x28 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_macro   0x00020a6f       0xb6 ./SDK/platform/devices/startup.o
+ .debug_macro   0x00020b25       0x40 ./SDK/platform/devices/startup.o
+ .debug_macro   0x00020b65      0x2af ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_macro   0x00020e14       0x16 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_macro   0x00020e2a       0xf7 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_macro   0x00020f21       0x10 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_macro   0x00020f31       0xcc ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_macro   0x00020ffd       0xd0 ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_macro   0x000210cd      0x10d ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_macro   0x000211da      0x106 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_macro   0x000212e0      0x11b ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_macro   0x000213fb       0xc9 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_macro   0x000214c4       0xf7 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_macro   0x000215bb       0xf0 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_macro   0x000216ab       0xc7 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_macro   0x00021772      0x130 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_macro   0x000218a2       0x34 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_macro   0x000218d6      0x108 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_macro   0x000219de       0xc0 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_macro   0x00021a9e       0xdd ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_macro   0x00021b7b       0xdd ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_macro   0x00021c58      0x130 ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_macro   0x00021d88      0x170 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_macro   0x00021ef8       0xfb ./SDK/rtos/osif/osif_baremetal.o
+ .debug_macro   0x00021ff3       0xd8 ./board/clock_config.o
+ .debug_macro   0x000220cb      0x128 ./board/peripherals_timing_pal_1.o
+ .debug_macro   0x000221f3      0x128 ./board/peripherals_timing_pal_2.o
+ .debug_macro   0x0002231b      0x2ba ./board/pin_mux.o
+ .debug_macro   0x000225d5      0x2b1 ./src/e-bike_app.o
+ .debug_macro   0x00022886       0xc4 ./src/e-bike_app.o
+ .debug_macro   0x0002294a       0x3a ./src/e-bike_app.o
+ .debug_macro   0x00022984      0x2a7 ./src/main.o
+ .debug_macro   0x00022c2b       0xf2 ./src/motor_control.o
+ .debug_macro   0x00022d1d       0xa0 ./src/pwm_isr.o
 
-.debug_line     0x00000000     0xdadb
+.debug_line     0x00000000     0xe4ad
  .debug_line    0x00000000      0x840 ./BaseDriver/Gpio.o
  .debug_line    0x00000840      0x7d1 ./BaseDriver/Timer.o
- .debug_line    0x00001011      0x480 ./BaseDriver/lpuart_LPUART_0.o
- .debug_line    0x00001491       0x8f ./Project_Settings/Startup_Code/startup_S32K142.o
- .debug_line    0x00001520      0x3ba ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_line    0x000018da      0x32f ./SDK/platform/devices/startup.o
- .debug_line    0x00001c09     0x14ce ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_line    0x000030d7     0x1048 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_line    0x0000411f      0x596 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_line    0x000046b5      0x4fd ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_line    0x00004bb2      0xa7f ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_line    0x00005631      0x514 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_line    0x00005b45      0x693 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_line    0x000061d8      0x528 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_line    0x00006700      0x87c ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_line    0x00006f7c      0x9bc ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_line    0x00007938      0x3e4 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_line    0x00007d1c      0xde0 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_line    0x00008afc      0x5c9 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_line    0x000090c5      0x3c8 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_line    0x0000948d      0x66f ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_line    0x00009afc      0x52e ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_line    0x0000a02a      0x7d4 ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_line    0x0000a7fe      0xb01 ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_line    0x0000b2ff      0x5b5 ./SDK/rtos/osif/osif_baremetal.o
- .debug_line    0x0000b8b4      0x3e8 ./board/clock_config.o
- .debug_line    0x0000bc9c      0x4a2 ./board/peripherals_timing_pal_1.o
- .debug_line    0x0000c13e      0x4a2 ./board/peripherals_timing_pal_2.o
- .debug_line    0x0000c5e0      0x6f4 ./board/pin_mux.o
- .debug_line    0x0000ccd4      0x707 ./src/e-bike_app.o
- .debug_line    0x0000d3db      0x700 ./src/main.o
+ .debug_line    0x00001011      0x28d ./BaseDriver/adc.o
+ .debug_line    0x0000129e      0x480 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_line    0x0000171e       0x8f ./Project_Settings/Startup_Code/startup_S32K142.o
+ .debug_line    0x000017ad      0x3ba ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_line    0x00001b67      0x32f ./SDK/platform/devices/startup.o
+ .debug_line    0x00001e96     0x14ce ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_line    0x00003364     0x1048 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_line    0x000043ac      0x596 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_line    0x00004942      0x4fd ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_line    0x00004e3f      0xa7f ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_line    0x000058be      0x514 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_line    0x00005dd2      0x693 ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_line    0x00006465      0x528 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_line    0x0000698d      0x87c ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_line    0x00007209      0x9bc ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_line    0x00007bc5      0x3e4 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_line    0x00007fa9      0xde0 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_line    0x00008d89      0x5c9 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_line    0x00009352      0x3c8 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_line    0x0000971a      0x66f ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_line    0x00009d89      0x52e ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_line    0x0000a2b7      0x7d4 ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_line    0x0000aa8b      0xb01 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_line    0x0000b58c      0x5b5 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_line    0x0000bb41      0x3e8 ./board/clock_config.o
+ .debug_line    0x0000bf29      0x4a2 ./board/peripherals_timing_pal_1.o
+ .debug_line    0x0000c3cb      0x4a2 ./board/peripherals_timing_pal_2.o
+ .debug_line    0x0000c86d      0x6f4 ./board/pin_mux.o
+ .debug_line    0x0000cf61      0x707 ./src/e-bike_app.o
+ .debug_line    0x0000d668      0x700 ./src/main.o
+ .debug_line    0x0000dd68      0x406 ./src/motor_control.o
+ .debug_line    0x0000e16e      0x33f ./src/pwm_isr.o
 
-.debug_str      0x00000000    0x79116
- .debug_str     0x00000000    0x70ef5 ./BaseDriver/Gpio.o
+.debug_str      0x00000000    0x797a6
+ .debug_str     0x00000000    0x70ee8 ./BaseDriver/Gpio.o
                               0x714b0 (size before relaxing)
- .debug_str     0x00070ef5      0x15a ./BaseDriver/Timer.o
+ .debug_str     0x00070ee8      0x15a ./BaseDriver/Timer.o
                               0x7150f (size before relaxing)
- .debug_str     0x0007104f       0xf5 ./BaseDriver/lpuart_LPUART_0.o
+ .debug_str     0x00071042      0x1e1 ./BaseDriver/adc.o
+                              0x63b66 (size before relaxing)
+ .debug_str     0x00071223       0xf5 ./BaseDriver/lpuart_LPUART_0.o
                               0x6a372 (size before relaxing)
- .debug_str     0x00071144       0x3f ./Project_Settings/Startup_Code/startup_S32K142.o
+ .debug_str     0x00071318       0x3f ./Project_Settings/Startup_Code/startup_S32K142.o
                                  0x67 (size before relaxing)
- .debug_str     0x00071183      0x264 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_str     0x00071357      0x264 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
                               0x6954e (size before relaxing)
- .debug_str     0x000713e7      0x367 ./SDK/platform/devices/startup.o
+ .debug_str     0x000715bb      0x367 ./SDK/platform/devices/startup.o
                               0x696c0 (size before relaxing)
- .debug_str     0x0007174e     0x23ab ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_str     0x00071922     0x239d ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
                               0x6d839 (size before relaxing)
- .debug_str     0x00073af9     0x120f ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_str     0x00073cbf     0x11ff ./SDK/platform/drivers/src/edma/edma_driver.o
                               0x6c3b6 (size before relaxing)
- .debug_str     0x00074d08       0x46 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_str     0x00074ebe       0x46 ./SDK/platform/drivers/src/edma/edma_hw_access.o
                               0x69c1f (size before relaxing)
- .debug_str     0x00074d4e      0x162 ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_str     0x00074f04      0x162 ./SDK/platform/drivers/src/edma/edma_irq.o
                               0x6992a (size before relaxing)
- .debug_str     0x00074eb0      0xe2e ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_str     0x00075066      0xe2e ./SDK/platform/drivers/src/ftm/ftm_common.o
                               0x6c5c0 (size before relaxing)
- .debug_str     0x00075cde       0xa7 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_str     0x00075e94       0xa7 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
                               0x6abf1 (size before relaxing)
- .debug_str     0x00075d85      0x35c ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_str     0x00075f3b      0x35c ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
                               0x6b746 (size before relaxing)
- .debug_str     0x000760e1      0x18e ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_str     0x00076297      0x18e ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
                               0x69df5 (size before relaxing)
- .debug_str     0x0007626f      0x83f ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_str     0x00076425      0x83f ./SDK/platform/drivers/src/lpit/lpit_driver.o
                               0x6b2ce (size before relaxing)
- .debug_str     0x00076aae      0x81c ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_str     0x00076c64      0x81c ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
                               0x6af84 (size before relaxing)
- .debug_str     0x000772ca       0x34 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_str     0x00077480       0x34 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
                               0x6961d (size before relaxing)
- .debug_str     0x000772fe      0xb43 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_str     0x000774b4      0xb43 ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
                               0x6bba4 (size before relaxing)
- .debug_str     0x00077e41       0xc4 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_str     0x00077ff7       0xc4 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
                               0x6a5ce (size before relaxing)
- .debug_str     0x00077f05       0x56 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_str     0x000780bb       0x56 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
                               0x69326 (size before relaxing)
- .debug_str     0x00077f5b      0x5b6 ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_str     0x00078111      0x5b6 ./SDK/platform/drivers/src/pins/pins_driver.o
                               0x6a81c (size before relaxing)
- .debug_str     0x00078511      0x19d ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_str     0x000786c7      0x19d ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
                               0x69d04 (size before relaxing)
- .debug_str     0x000786ae      0x30e ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_str     0x00078864      0x30e ./SDK/platform/pal/src/timing/timing_irq.o
                               0x6ac7f (size before relaxing)
- .debug_str     0x000789bc      0x411 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_str     0x00078b72      0x411 ./SDK/platform/pal/src/timing/timing_pal.o
                               0x6cb7d (size before relaxing)
- .debug_str     0x00078dcd      0x1a7 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_str     0x00078f83      0x1a1 ./SDK/rtos/osif/osif_baremetal.o
                               0x6a667 (size before relaxing)
- .debug_str     0x00078f74       0x18 ./board/clock_config.o
+ .debug_str     0x00079124       0x18 ./board/clock_config.o
                               0x6b5c6 (size before relaxing)
- .debug_str     0x00078f8c       0x24 ./board/peripherals_timing_pal_1.o
+ .debug_str     0x0007913c       0x24 ./board/peripherals_timing_pal_1.o
                               0x6aaf6 (size before relaxing)
- .debug_str     0x00078fb0       0x24 ./board/peripherals_timing_pal_2.o
+ .debug_str     0x00079160       0x24 ./board/peripherals_timing_pal_2.o
                               0x6ae0d (size before relaxing)
- .debug_str     0x00078fd4       0x13 ./board/pin_mux.o
+ .debug_str     0x00079184       0x13 ./board/pin_mux.o
                               0x71363 (size before relaxing)
- .debug_str     0x00078fe7      0x117 ./src/e-bike_app.o
+ .debug_str     0x00079197      0x117 ./src/e-bike_app.o
                               0x71470 (size before relaxing)
- .debug_str     0x000790fe       0x18 ./src/main.o
+ .debug_str     0x000792ae       0x18 ./src/main.o
                               0x713d3 (size before relaxing)
+ .debug_str     0x000792c6      0x46a ./src/motor_control.o
+                              0x63fc7 (size before relaxing)
+ .debug_str     0x00079730       0x76 ./src/pwm_isr.o
+                              0x63ffa (size before relaxing)
 
 .comment        0x00000000       0xa0
  .comment       0x00000000       0xa0 ./BaseDriver/Gpio.o
                                  0xa1 (size before relaxing)
  .comment       0x000000a0       0xa1 ./BaseDriver/Timer.o
+ .comment       0x000000a0       0xa1 ./BaseDriver/adc.o
  .comment       0x000000a0       0xa1 ./BaseDriver/lpuart_LPUART_0.o
  .comment       0x000000a0       0xa1 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
  .comment       0x000000a0       0xa1 ./SDK/platform/devices/startup.o
@@ -3282,57 +3515,66 @@ OUTPUT(EBike_Main.elf elf32-littlearm)
  .comment       0x000000a0       0xa1 ./board/pin_mux.o
  .comment       0x000000a0       0xa1 ./src/e-bike_app.o
  .comment       0x000000a0       0xa1 ./src/main.o
+ .comment       0x000000a0       0xa1 ./src/motor_control.o
+ .comment       0x000000a0       0xa1 ./src/pwm_isr.o
 
-.debug_frame    0x00000000     0x218c
+.debug_frame    0x00000000     0x2318
  .debug_frame   0x00000000      0x17c ./BaseDriver/Gpio.o
  .debug_frame   0x0000017c       0xbc ./BaseDriver/Timer.o
- .debug_frame   0x00000238       0x6c ./BaseDriver/lpuart_LPUART_0.o
- .debug_frame   0x000002a4       0x40 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_frame   0x000002e4       0x2c ./SDK/platform/devices/startup.o
- .debug_frame   0x00000310      0x3a4 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_frame   0x000006b4      0x3a0 ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_frame   0x00000a54      0x140 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_frame   0x00000b94      0x1ac ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_frame   0x00000d40      0x204 ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_frame   0x00000f44       0x64 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_frame   0x00000fa8       0x7c ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_frame   0x00001024       0xd8 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_frame   0x000010fc      0x1a8 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_frame   0x000012a4      0x1b8 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_frame   0x0000145c       0x20 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_frame   0x0000147c      0x3ac ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_frame   0x00001828      0x100 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_frame   0x00001928       0x40 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
- .debug_frame   0x00001968      0x1e4 ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_frame   0x00001b4c       0xa0 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_frame   0x00001bec      0x208 ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_frame   0x00001df4      0x1fc ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_frame   0x00001ff0       0xf4 ./SDK/rtos/osif/osif_baremetal.o
- .debug_frame   0x000020e4       0x20 ./src/e-bike_app.o
- .debug_frame   0x00002104       0x28 ./src/main.o
- .debug_frame   0x0000212c       0x2c c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00002158       0x34 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00000238       0x20 ./BaseDriver/adc.o
+ .debug_frame   0x00000258       0x6c ./BaseDriver/lpuart_LPUART_0.o
+ .debug_frame   0x000002c4       0x40 ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_frame   0x00000304       0x2c ./SDK/platform/devices/startup.o
+ .debug_frame   0x00000330      0x3a4 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_frame   0x000006d4      0x3a0 ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_frame   0x00000a74      0x140 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_frame   0x00000bb4      0x1ac ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_frame   0x00000d60      0x204 ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_frame   0x00000f64       0x64 ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_frame   0x00000fc8       0x7c ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_frame   0x00001044       0xd8 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_frame   0x0000111c      0x1a8 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_frame   0x000012c4      0x1b8 ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_frame   0x0000147c       0x20 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_frame   0x0000149c      0x3ac ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_frame   0x00001848      0x100 ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_frame   0x00001948       0x40 ./SDK/platform/drivers/src/lpuart/lpuart_irq.o
+ .debug_frame   0x00001988      0x1e4 ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_frame   0x00001b6c       0xa0 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_frame   0x00001c0c      0x208 ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_frame   0x00001e14      0x1fc ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_frame   0x00002010       0xf4 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_frame   0x00002104       0x20 ./src/e-bike_app.o
+ .debug_frame   0x00002124       0x28 ./src/main.o
+ .debug_frame   0x0000214c      0x118 ./src/motor_control.o
+ .debug_frame   0x00002264       0x2c ./src/pwm_isr.o
+ .debug_frame   0x00002290       0x2c c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x000022bc       0x34 c:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x000022f0       0x28 C:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-memcpy-stub.o)
 
-.debug_loc      0x00000000    0x15627
+.debug_loc      0x00000000    0x16d99
  .debug_loc     0x00000000       0xca ./BaseDriver/Timer.o
- .debug_loc     0x000000ca      0x12f ./BaseDriver/lpuart_LPUART_0.o
- .debug_loc     0x000001f9       0xeb ./SDK/platform/devices/S32K142/startup/system_S32K142.o
- .debug_loc     0x000002e4       0xec ./SDK/platform/devices/startup.o
- .debug_loc     0x000003d0     0x5061 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
- .debug_loc     0x00005431     0x336f ./SDK/platform/drivers/src/edma/edma_driver.o
- .debug_loc     0x000087a0      0x7b9 ./SDK/platform/drivers/src/edma/edma_hw_access.o
- .debug_loc     0x00008f59       0x50 ./SDK/platform/drivers/src/edma/edma_irq.o
- .debug_loc     0x00008fa9     0x1d84 ./SDK/platform/drivers/src/ftm/ftm_common.o
- .debug_loc     0x0000ad2d      0x25a ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
- .debug_loc     0x0000af87      0xb5b ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
- .debug_loc     0x0000bae2      0x678 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
- .debug_loc     0x0000c15a     0x1319 ./SDK/platform/drivers/src/lpit/lpit_driver.o
- .debug_loc     0x0000d473     0x18fd ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
- .debug_loc     0x0000ed70       0x36 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
- .debug_loc     0x0000eda6     0x264e ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
- .debug_loc     0x000113f4      0x75e ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
- .debug_loc     0x00011b52      0x7c7 ./SDK/platform/drivers/src/pins/pins_driver.o
- .debug_loc     0x00012319      0x639 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
- .debug_loc     0x00012952      0x610 ./SDK/platform/pal/src/timing/timing_irq.o
- .debug_loc     0x00012f62     0x2372 ./SDK/platform/pal/src/timing/timing_pal.o
- .debug_loc     0x000152d4      0x353 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_loc     0x000000ca       0x21 ./BaseDriver/adc.o
+ .debug_loc     0x000000eb      0x12f ./BaseDriver/lpuart_LPUART_0.o
+ .debug_loc     0x0000021a       0xeb ./SDK/platform/devices/S32K142/startup/system_S32K142.o
+ .debug_loc     0x00000305       0xec ./SDK/platform/devices/startup.o
+ .debug_loc     0x000003f1     0x5061 ./SDK/platform/drivers/src/clock/S32K1xx/clock_S32K1xx.o
+ .debug_loc     0x00005452     0x336f ./SDK/platform/drivers/src/edma/edma_driver.o
+ .debug_loc     0x000087c1      0x7b9 ./SDK/platform/drivers/src/edma/edma_hw_access.o
+ .debug_loc     0x00008f7a       0x50 ./SDK/platform/drivers/src/edma/edma_irq.o
+ .debug_loc     0x00008fca     0x1d84 ./SDK/platform/drivers/src/ftm/ftm_common.o
+ .debug_loc     0x0000ad4e      0x25a ./SDK/platform/drivers/src/ftm/ftm_hw_access.o
+ .debug_loc     0x0000afa8      0xb5b ./SDK/platform/drivers/src/ftm/ftm_oc_driver.o
+ .debug_loc     0x0000bb03      0x678 ./SDK/platform/drivers/src/interrupt/interrupt_manager.o
+ .debug_loc     0x0000c17b     0x1319 ./SDK/platform/drivers/src/lpit/lpit_driver.o
+ .debug_loc     0x0000d494     0x18fd ./SDK/platform/drivers/src/lptmr/lptmr_driver.o
+ .debug_loc     0x0000ed91       0x36 ./SDK/platform/drivers/src/lptmr/lptmr_hw_access.o
+ .debug_loc     0x0000edc7     0x264e ./SDK/platform/drivers/src/lpuart/lpuart_driver.o
+ .debug_loc     0x00011415      0x75e ./SDK/platform/drivers/src/lpuart/lpuart_hw_access.o
+ .debug_loc     0x00011b73      0x7c7 ./SDK/platform/drivers/src/pins/pins_driver.o
+ .debug_loc     0x0001233a      0x639 ./SDK/platform/drivers/src/pins/pins_port_hw_access.o
+ .debug_loc     0x00012973      0x610 ./SDK/platform/pal/src/timing/timing_irq.o
+ .debug_loc     0x00012f83     0x2372 ./SDK/platform/pal/src/timing/timing_pal.o
+ .debug_loc     0x000152f5      0x353 ./SDK/rtos/osif/osif_baremetal.o
+ .debug_loc     0x00015648     0x1647 ./src/motor_control.o
+ .debug_loc     0x00016c8f      0x10a ./src/pwm_isr.o
