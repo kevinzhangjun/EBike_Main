@@ -22,7 +22,7 @@ void GPIO_Init(void)
 {
 	PINS_DRV_Init(NUM_OF_CONFIGURED_PINS0, g_pin_mux_InitConfigArr0);
 	Key_Scan();
-	key_info.Mode_State = mode1_Auto;
+	key_info.Mode_State = mode_init;
 	Lamp_Front_Dis();
 	Lamp_Rear_Dis();
 
