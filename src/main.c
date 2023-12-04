@@ -8,6 +8,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
+#include "motor_control.h"
+#include "peripheral_init.h"
 
 volatile int exit_code = 0;
 
@@ -30,6 +32,9 @@ int main(void)
     GPIO_Init();
     Timer_Init();
     Init_Uart();
+    peripheral_init();
+    Init_Motor_Control();
+    MC_disable_PWM();
 
     while(1)
     {

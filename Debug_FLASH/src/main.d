@@ -31,7 +31,9 @@ src/main.o: ../src/main.c \
  C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/edma_driver.h \
  C:/workspace_git/EBike_Main/BaseDriver/Timer.h \
  C:/workspace_git/EBike_Main/BaseDriver/Gpio.h \
- C:/workspace_git/EBike_Main/src/e-bike_app.h
+ C:/workspace_git/EBike_Main/src/e-bike_app.h ../src/motor_control.h \
+ C:/workspace_git/EBike_Main/SDK/platform/devices/S32K142/include/S32K142.h \
+ C:/workspace_git/EBike_Main/BaseDriver/peripheral_init.h
 
 C:/workspace_git/EBike_Main/board/sdk_project_config.h:
 
@@ -98,3 +100,9 @@ C:/workspace_git/EBike_Main/BaseDriver/Timer.h:
 C:/workspace_git/EBike_Main/BaseDriver/Gpio.h:
 
 C:/workspace_git/EBike_Main/src/e-bike_app.h:
+
+../src/motor_control.h:
+
+C:/workspace_git/EBike_Main/SDK/platform/devices/S32K142/include/S32K142.h:
+
+C:/workspace_git/EBike_Main/BaseDriver/peripheral_init.h:
