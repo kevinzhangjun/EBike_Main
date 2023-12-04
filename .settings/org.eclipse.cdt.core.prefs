@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/com.nxp.s32ds.cle.arm.mbs.arm32.bare.exe.debug.1559595546/PATH/delimiter=;
+environment/project/com.nxp.s32ds.cle.arm.mbs.arm32.bare.exe.debug.1559595546/PATH/operation=replace
+environment/project/com.nxp.s32ds.cle.arm.mbs.arm32.bare.exe.debug.1559595546/PATH/value=C\:\\NXP\\S32DS_ARM_v2.2\\eclipse;C\:\\NXP\\S32DS_ARM_v2.2\\S32DS\\build_tools\\msys32\\usr\\bin;C\:/NXP/S32DS_ARM_v2.2/eclipse/jre/bin/client;C\:/NXP/S32DS_ARM_v2.2/eclipse/jre/bin;C\:/NXP/S32DS_ARM_v2.2/eclipse/jre/lib/i386;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C\:\\WINDOWS\\System32\\OpenSSH\\;C\:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\;C\:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\;C\:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin;C\:\\Users\\jz3776\\AppData\\Local\\Microsoft\\WindowsApps;C\:\\NXP\\S32DS_ARM_v2.2\\S32DS\\build_tools\\gcc_v6.3\\gcc-6.3-arm32-eabi\\bin
+environment/project/com.nxp.s32ds.cle.arm.mbs.arm32.bare.exe.debug.1559595546/append=true
+environment/project/com.nxp.s32ds.cle.arm.mbs.arm32.bare.exe.debug.1559595546/appendContributed=true
