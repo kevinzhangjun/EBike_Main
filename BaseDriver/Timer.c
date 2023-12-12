@@ -52,9 +52,13 @@ void Timer_Init(void)
     status = TIMING_GetResolution(&timingLptmrInst0, TIMER_RESOLUTION_TYPE_NANOSECOND, &lptmrResolution);
     DEV_ASSERT(status == STATUS_SUCCESS);
 
+
+    INT_SYS_SetPriority(LPIT0_Ch0_IRQn,2);
     /* Start LPIT channel 0 counting with the period is 1 second,
        the period in tick = the period in nanosecond / LPIT tick resolution in nanosecond */
     TIMING_StartChannel(&timingLpitInst0, LPIT_CHANNEL, LPITMR_PERIOD_10us/lpitResolution);
+
+    INT_SYS_SetPriority(LPTMR0_IRQn,2);
     /* Start LPTMR channel 0 counting with the period is 1 second,
        the period in tick = the period in nanosecond / LPTMR tick resolution nanosecond*/
     TIMING_StartChannel(&timingLptmrInst0, LPTMR_CHANNEL, LPTMR_PERIOD_500us/lptmrResolution);
@@ -75,11 +79,12 @@ void LPIT_IRQ(void * userData)
     (void)userData;
 
     timer_10us++;
-    if(timer_10us >= 20000)
+    Speed_Info.Cdn_In_Cnt_10us++;
+    if((PINS_DRV_ReadPins(CADENCE_IN_GPIO) & CADENCE_IN_GPIO_PIN) == 0)
     {
-    	timer_10us =0;
-
+    	Speed_Info.Cdn_In_Dir_10us++;
     }
+
 }
 
 /********************************************************************************************
@@ -178,7 +183,13 @@ void Time_4ms_Tasks(void)
 
 		}
 	}
-	else if(LED_4ms >= 125)
+	else if(LED_4ms >= 125 && Speed_Info.Cdn_In_Dir == CDN_IN_FORWARD)
+	{
+		LED_4ms = 0;
+    	/* Toggle LED_RED */
+		LED_Red_Toggle();
+	}
+	else if(LED_4ms >= 50 && Speed_Info.Cdn_In_Dir == CDN_IN_BACKWARD)
 	{
 		LED_4ms = 0;
     	/* Toggle LED_RED */

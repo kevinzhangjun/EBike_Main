@@ -5,18 +5,7 @@
 
 #define No_Debug			1
 
-#define Revolution			20
-#define Inch_mm 			25.4
-#define Mile_M				1600000
-#define PI					3.14159
-#define Time_Factor			3600*1000*
-#define RPM_1_Period		6000
-#define RPM_120_Period		50
-
 #define CMD_Len	sizeof(float)*9+8
-	
-
-
 
 
 typedef enum
@@ -71,17 +60,8 @@ void Get_Speed_Value(void);
 void Motor_Handler(void);
 void Monitor_Handler(void);
 
-extern volatile uint8_t hallcode;
-extern volatile uint8_t lasthallcode;
+void Get_Cdn_In_Value(void);
 
-extern uint16_t volatile Speed_Cnt_500us;
-extern uint16_t volatile Speed_Value;
-extern float  Speed_Mil_Hr;
-
-extern uint16_t volatile Candence_Out_500us;
-extern uint16_t volatile Candence_Out_Value;
-extern uint16_t volatile Candence_In_500us;
-extern uint16_t volatile Candence_In_Value;
 
 extern Motor_ID MT_State;
 

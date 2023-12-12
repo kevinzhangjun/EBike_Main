@@ -161,6 +161,21 @@ pin_settings_config_t g_pin_mux_InitConfigArr0[NUM_OF_CONFIGURED_PINS0] = {
         .digitalFilter   = false,
         .initValue       = 0U,
     },
+    {
+        .base            = CADENCE_IN_PORT,
+        .pinPortIdx      = CADENCE_IN_ID,
+        .pullConfig      = PORT_INTERNAL_PULL_NOT_ENABLED,
+        .driveSelect     = PORT_LOW_DRIVE_STRENGTH,
+        .passiveFilter   = false,
+        .mux             = PORT_MUX_AS_GPIO,
+        .pinLock         = false,
+        .intConfig       = PORT_DMA_INT_DISABLED,
+        .clearIntFlag    = false,
+        .gpioBase        = CADENCE_IN_GPIO,
+        .direction       = GPIO_INPUT_DIRECTION,
+        .digitalFilter   = false,
+        .initValue       = 0U,
+    },
 };
 /***********************************************************************************************************************
  * EOF

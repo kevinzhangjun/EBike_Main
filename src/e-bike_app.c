@@ -11,21 +11,7 @@
 #include "e-bike_app.h"
 
 
-volatile uint8_t hallcode;
-volatile uint8_t lasthallcode=0;
 Motor_ID MT_State;
-
-uint16_t volatile Speed_Cnt_500us;
-uint16_t volatile Speed_Value;
-uint16_t Speed_Value_lst;
-float  	 Speed_Mil_Hr;
-
-uint16_t volatile Candence_Out_500us;
-uint16_t volatile Candence_Out_Value;
-
-uint16_t volatile Candence_In_500us;
-uint16_t volatile Candence_In_Value;
-
 Idt_EB_APP_T EB_APP_ST;
 
 
@@ -35,4 +21,22 @@ void e_bike_app_init(void)
 
 }
 
+void Get_Cdn_In_Value(void)
+{
 
+	if(Speed_Info.Cdn_In_Value != Speed_Info.Cdn_In_Value_lst && Speed_Info.Cdn_In_Value !=0)
+	{
+		Speed_Info.Cdn_In_Value_lst = Speed_Info.Cdn_In_Value;
+
+		if(Speed_Info.Cdn_In_Value < CDN_IN_RPM_1_Period && Speed_Info.Cdn_In_Value > CDN_IN_RPM_480_Period)
+		{
+
+			Speed_Info.Cdn_In_RPM = (float)CDN_IN_RPM_Factor;
+			Speed_Info.Cdn_In_RPM /= Speed_Info.Cdn_In_Value;
+		}
+		else
+		{
+			Speed_Info.Cdn_In_RPM = 0;
+		}
+	}
+}
