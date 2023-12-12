@@ -13,16 +13,19 @@ uint16_t ADC_filtered[NUM_ADC];
 int32_t ADC_filter_state[NUM_ADC];
 
 void ADC_init(int pcc_adc_index, ADC_Type *adc) {
- PCC->PCCn[pcc_adc_index] &=~ PCC_PCCn_CGC_MASK; /* Disable clock to change PCS */
-// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(1); /* PCS=1: Select SOSCDIV2 */
-// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(6); /* PCS=6: Select SPLLDIV2_CLK */
- PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(3); /* PCS=3: Select FIRCDIV2_CLK */
+ PCC->PCCn[pcc_adc_index] &= ~PCC_PCCn_CGC_MASK; /* Disable clock to change PCS */
+ PCC->PCCn[pcc_adc_index] &= ~PCC_PCCn_PCS_MASK; // clear bits in the clock source selection part of register
+// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(1); /* PCS=1: Select SOSCDIV2 */      // <- 5uS
+// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(1); /* PCS=3: Select SOSCDIV2_CLK */  // <- 5uS
+// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(2); /* PCS=3: Select SIRCDIV2_CLK */  // <- 5uS
+ PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(3); /* PCS=3: Select FIRCDIV2_CLK */  // <- 2uS
+// PCC->PCCn[pcc_adc_index] |= PCC_PCCn_PCS(6); /* PCS=6: Select SPLLDIV2_CLK */  // <- 2uS
  PCC->PCCn[pcc_adc_index] |= PCC_PCCn_CGC_MASK; /* Enable bus clock in ADC */
 
  adc->SC1[0] =0x00001F;	 /* ADCH=1F: Module is disabled for conversions*/
  	 	 	 	 	 	 /* AIEN=0: Interrupts are disabled */
 
- adc->CFG1 = 0x000000004; /* ADICLK=0: Input clk=ALTCLK1=SOSCDIV2 */
+ adc->CFG1 = 0x000000004; /* ADICLK=0: Input clk=ALTCLK1 = See above PCC */
  	 	 	 	 	 	  /* ADIV=0: Prescaler=1 */
  	 	 	 	 	 	  /* MODE=1: 12-bit conversion */
 
