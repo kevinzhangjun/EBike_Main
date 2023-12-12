@@ -36,12 +36,6 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 				  | (((PTE->PDIR >> 11) & 1) << 1)
 				  | (((PTE->PDIR >> 10) & 1) );
 
-	MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
-	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
-
-	pot1 = ADC_filtered[5];
-	pot2 = ADC_filtered[6];
-
 	// There might be time to do a little in here
 	while(adc_complete(ADC0)==0){} /* Wait for conversion complete flag for A-phase currents */
 
@@ -54,6 +48,12 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	convertAdcChan(ADC0, 8); // convert M1 I_B
 	convertAdcChan(ADC1, 7); // convert M2 I_B
 	TIMING_PIN_LOW
+
+	MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
+	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
+
+	pot1 = ADC_filtered[5];
+	pot2 = ADC_filtered[6];
 
 	// read HALL sensors for Motor 2  - Nice IO selection...
 	M2.hall_input = ((PTA->PDIR >> 11) & 7);

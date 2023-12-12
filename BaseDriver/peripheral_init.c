@@ -94,7 +94,8 @@ void Motor_Timer_Init(int pcc_ftm_index, FTM_Type *ftm) {
 
 // ftm->SYNC = 0x0002;         /* update duty cycles on CNTMAX */
  ftm->SYNC = 0x0001;         /* update duty cycles on CNTMIN */
- ftm->MOD = 2000 -1 ;	/* FTM1 counter final value (used for PWM mode) */
+// ftm->MOD = 2000 -1 ;	/* FTM1 counter final value (used for PWM mode) */
+ ftm->MOD = 1200 -1 ;	/* FTM1 counter final value (used for PWM mode) */
  	 	 	 	 	 	/* FTM1 Period = MOD-CNTIN+0x0001 ~= 62500 ctr clks */
  	 	 	 	 	 	/* 80MHz /2 /2000 = 20KHz */
 
@@ -115,7 +116,7 @@ void Motor_Timer_Init(int pcc_ftm_index, FTM_Type *ftm) {
  ftm->DEADTIME = DEADTIME_VAL;   // 400ns deadtime  80MHz/4 = 20MHz(50ns) and 8 cycles of that
  //ftm->DEADTIME = 0x00008096;   // 1000ns deadtime  80MHz/4 = 20MHz and 22 cycles of that
 
- ftm->MOD = 2000 -1 ;	/* FTM1 counter final value (used for PWM mode) */
+ ftm->MOD = 1200 -1 ;	/* FTM1 counter final value (used for PWM mode) */
  	 	 	 	 	 	/* FTM1 Period = MOD-CNTIN+0x0001 ~= 62500 ctr clks */
  	 	 	 	 	 	/* 80MHz /2 /2000 = 20KHz */
 
@@ -137,8 +138,8 @@ void Motor_Timer_Init(int pcc_ftm_index, FTM_Type *ftm) {
  ftm->CONTROLS[4].CnSC = CHAN_CNSC;
  ftm->CONTROLS[5].CnSC = CHAN_CNSC;
 
- ftm->CONTROLS[6].CnV = 1000; /* FTM ch6 compare value (~50% duty cycle) */
- ftm->CONTROLS[2].CnV = 1000; /* FTM ch2 compare value (~50% duty cycle) */
- ftm->CONTROLS[4].CnV = 1000; /* FTM ch4 compare value (~50% duty cycle) */
+ ftm->CONTROLS[6].CnV = 600; /* FTM ch6 compare value (~50% duty cycle) */
+ ftm->CONTROLS[2].CnV = 600; /* FTM ch2 compare value (~50% duty cycle) */
+ ftm->CONTROLS[4].CnV = 600; /* FTM ch4 compare value (~50% duty cycle) */
 
 }
