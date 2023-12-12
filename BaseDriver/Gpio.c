@@ -18,13 +18,16 @@ uint16_t s2_Rising;
 uint16_t s2_Falling;
 uint16_t s2_8ms;
 
+Speed_ST Speed_Info;
+
 void GPIO_Init(void)
 {
 	PINS_DRV_Init(NUM_OF_CONFIGURED_PINS0, g_pin_mux_InitConfigArr0);
 	Key_Scan();
-	key_info.Mode_State = mode1_Auto;
+	key_info.Mode_State = mode_init;
 	Lamp_Front_Dis();
 	Lamp_Rear_Dis();
+	EXTI_Configuration();
 
 }
 
@@ -230,6 +233,64 @@ void Brake_Routine(void)
 	}
 }
 
+/*******************************************************************************
+*
+* Function: 	void SPEED_ISR(void)
+*
+*******************************************************************************/
+void CADENCE_IN_ISR( void )
+{
+	uint32_t intStatus;
+	/* check interrupt flags PTD16 and 15 */
+	intStatus = PINS_DRV_GetPortIntFlag( CADENCE_IN_PORT );
 
+	if(intStatus & CADENCE_IN_GPIO_PIN )
+	{
 
+		PINS_DRV_ClearPinIntFlagCmd( CADENCE_IN_PORT, CADENCE_IN_ID);
+
+		if(Speed_Info.Cdn_In_Cnt_10us !=0)
+		{
+			Speed_Info.Cdn_In_Value = Speed_Info.Cdn_In_Cnt_10us;
+
+			Speed_Info.Cdn_In_Cnt_10us = 0;
+
+			if(Speed_Info.Cdn_In_Dir_10us < CADENCE_IN_DIR_THRESHOLD)
+			{
+				Speed_Info.Cdn_In_Dir = CDN_IN_BACKWARD;
+			}
+			else
+			{
+				Speed_Info.Cdn_In_Dir = CDN_IN_FORWARD;
+			}
+
+			Speed_Info.Cdn_In_Dir_10us = 0;
+		}
+		else
+		{
+
+		}
+	}
+	else
+	{
+
+	}
+}
+
+/********************************************************************************************
+*Function Name: void EXTI_Configuration(void)
+*
+*Input parameter: None
+*Output parameter: None
+*
+*
+*******************************************************************************************/
+
+void EXTI_Configuration(void)
+{
+	PINS_DRV_SetPinIntSel(CADENCE_IN_PORT, CADENCE_IN_ID, PORT_INT_FALLING_EDGE);
+	INT_SYS_SetPriority(CADENCE_IN_PORT_IRQn,1);
+    INT_SYS_InstallHandler(CADENCE_IN_PORT_IRQn, &CADENCE_IN_ISR, NULL);
+    INT_SYS_EnableIRQ(CADENCE_IN_PORT_IRQn);
+}
 

@@ -50,6 +50,21 @@
 #define BRAKE_ID   			(3u)
 #define BRAKE_GPIO_PIN   	(1<<BRAKE_ID)
 
+/*****CADENCE_IN接口声明*****/
+#define CADENCE_IN_GPIO  			(PTD)
+#define CADENCE_IN_PORT  			(PORTD)
+#define CADENCE_IN_ID   			(16u)
+#define CADENCE_IN_GPIO_PIN   		(1<<CADENCE_IN_ID)
+#define CADENCE_IN_PORT_IRQn 		PORTD_IRQn
+#define CADENCE_IN_DIR_THRESHOLD 	8
+
+#define Revolution				20
+#define CDN_IN_RPM_1_Period		60*1000*100/Revolution
+#define CDN_IN_RPM_480_Period	1*125*100/Revolution
+#define CDN_IN_RPM_Factor		60*1000*100/Revolution
+
+
+
 typedef enum
 {
 	mode_init,
@@ -70,6 +85,25 @@ typedef struct
 	uint32_t  Cnt_64ms;      //计数 64ms
 }Key_Info;
 
+typedef enum
+{
+	CDN_IN_FORWARD,
+	CDN_IN_BACKWARD
+}CDN_IN_DIR_ID;
+typedef struct
+{
+	CDN_IN_DIR_ID	  Cdn_In_Dir;
+	uint32_t volatile Cdn_In_Dir_10us;
+	uint32_t volatile Speed_Cnt_10us;
+	uint32_t volatile Cdn_In_Cnt_10us;
+	uint32_t volatile Speed_Value;
+	uint32_t 		  Speed_Value_lst;
+	uint32_t volatile Cdn_In_Value;
+	uint32_t 		  Cdn_In_Value_lst;
+	float  	 		  Speed_Per_Hr;
+	float  	 		  Speed_RPM;
+	float  	 		  Cdn_In_RPM;
+}Speed_ST;
 
 void GPIO_Init(void);
 
@@ -93,7 +127,12 @@ void Lamp_Rear_Dis(void);
 
 void Brake_Routine(void);
 
+
+void EXTI_Configuration(void);
+
 extern uint16_t s2_8ms;
 extern Key_Info key_info;
+
+extern Speed_ST Speed_Info;
 
 #endif

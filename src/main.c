@@ -41,6 +41,7 @@ int main(void)
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
+    	Get_Cdn_In_Value();
     }
 
     for(;;) {
