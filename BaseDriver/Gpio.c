@@ -257,11 +257,25 @@ void CADENCE_IN_ISR( void )
 
 			if(Speed_Info.Cdn_In_Dir_10us < CADENCE_IN_DIR_THRESHOLD)
 			{
-				Speed_Info.Cdn_In_Dir = CDN_IN_BACKWARD;
+				Speed_Info.Cdn_In_Dir_Flt_Backward++;
+				Speed_Info.Cdn_In_Dir_Flt_Forward = 0;
+				if(Speed_Info.Cdn_In_Dir_Flt_Backward > 2 )
+				{
+					Speed_Info.Cdn_In_Dir = CDN_IN_BACKWARD;
+					Speed_Info.Cdn_In_Dir_Flt_Backward = 0;
+				}
+
 			}
 			else
 			{
-				Speed_Info.Cdn_In_Dir = CDN_IN_FORWARD;
+				Speed_Info.Cdn_In_Dir_Flt_Forward++;
+				Speed_Info.Cdn_In_Dir_Flt_Backward = 0;
+				if(Speed_Info.Cdn_In_Dir_Flt_Forward > 2)
+				{
+					Speed_Info.Cdn_In_Dir = CDN_IN_FORWARD;
+					Speed_Info.Cdn_In_Dir_Flt_Forward = 0;
+				}
+
 			}
 
 			Speed_Info.Cdn_In_Dir_10us = 0;

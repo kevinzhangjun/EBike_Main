@@ -74,8 +74,6 @@ void peripheral_init(void) {
     S32_NVIC->ISER[3] = 1 << (122 % 32); /* IRQ104-FTM3 Reload interrupt: enable IRQ */
     S32_NVIC->IP[138] = 0x0A; 			/* IRQ122-FTM3 Reload interrupt: priority 10 of 0-15*/
 
-    INT_SYS_SetPriority(FTM3_Ovf_Reload_IRQn,2);
-
    	FTM3->SC = 0x00FC0068;  // enable Reload IRQ
 }
 

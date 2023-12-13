@@ -93,6 +93,8 @@ typedef enum
 typedef struct
 {
 	CDN_IN_DIR_ID	  Cdn_In_Dir;
+	uint8_t 		  Cdn_In_Dir_Flt_Backward;
+	uint8_t 		  Cdn_In_Dir_Flt_Forward;
 	uint32_t volatile Cdn_In_Dir_10us;
 	uint32_t volatile Speed_Cnt_10us;
 	uint32_t volatile Cdn_In_Cnt_10us;
