@@ -8,8 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
-#include "motor_control.h"
-#include "peripheral_init.h"
+
 
 volatile int exit_code = 0;
 

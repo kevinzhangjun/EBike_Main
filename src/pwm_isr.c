@@ -120,7 +120,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
         static int16_t a;
         int16_t y = 0x4000 - (((int32_t)x * x) >> 16);
         a = (a & 0x0fff) + (((int32_t)y * y) >> 16);
-        PTE->PDOR = (a >> 12) ^ 1;   // LED output
+//        PTE->PDOR = (a >> 12) ^ 1;   // LED output
 //        x += (uint16_t)(M1.old_hall_theta) / 0x1555; // soft blink speed
         x += led_speed;
 //        x += 3; // soft blink speed

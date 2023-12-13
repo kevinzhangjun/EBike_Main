@@ -53,15 +53,17 @@ void Timer_Init(void)
     DEV_ASSERT(status == STATUS_SUCCESS);
 
 
-    INT_SYS_SetPriority(LPIT0_Ch0_IRQn,2);
+    INT_SYS_SetPriority(LPIT0_Ch0_IRQn,1);
     /* Start LPIT channel 0 counting with the period is 1 second,
        the period in tick = the period in nanosecond / LPIT tick resolution in nanosecond */
     TIMING_StartChannel(&timingLpitInst0, LPIT_CHANNEL, LPITMR_PERIOD_10us/lpitResolution);
 
-    INT_SYS_SetPriority(LPTMR0_IRQn,2);
+    INT_SYS_SetPriority(LPTMR0_IRQn,3);
     /* Start LPTMR channel 0 counting with the period is 1 second,
        the period in tick = the period in nanosecond / LPTMR tick resolution nanosecond*/
     TIMING_StartChannel(&timingLptmrInst0, LPTMR_CHANNEL, LPTMR_PERIOD_500us/lptmrResolution);
+
+
 
 }
 

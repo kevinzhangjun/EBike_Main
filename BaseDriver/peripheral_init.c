@@ -32,14 +32,14 @@ void peripheral_init(void) {
     PORTA->PCR[13] |= PORT_PCR_MUX(1); // PORTA_13 is GPIO - HALL M1 A1
     PTA->PDDR &= ~((1<<11) | (1<<12) | (1<<13)); // inputs
 
-    PTE->PDDR |= 1;     // PE0 is output - LED
+//    PTE->PDDR |= 1;     // PE0 is output - LED
 
     PORTD->PCR[7] |= PORT_PCR_MUX(1);   // PTD7 is output for GD reset
     PTD->PDDR |= (1<<7);
     PTD->PCOR = 1<<7;    // clear ~GD reset
 
-    PTE->PCOR = 1;   // LED on
-    PTE->PSOR = 1;   // LED off
+//    PTE->PCOR = 1;   // LED on
+//    PTE->PSOR = 1;   // LED off
 
 //    PORTB->PCR[1] |= PORT_PCR_MUX(1); // CAN/UART TX is GPIO
 //    PTB->PDDR |= 2; // PB2 is output
@@ -73,8 +73,10 @@ void peripheral_init(void) {
     S32_NVIC->ICPR[3] = 1 << (122 % 32); /* IRQ104-FTM3 Reload interrupt: clr any pending IRQ*/
     S32_NVIC->ISER[3] = 1 << (122 % 32); /* IRQ104-FTM3 Reload interrupt: enable IRQ */
     S32_NVIC->IP[138] = 0x0A; 			/* IRQ122-FTM3 Reload interrupt: priority 10 of 0-15*/
-   	FTM3->SC = 0x00FC0068;  // enable Reload IRQ
 
+    INT_SYS_SetPriority(FTM3_Ovf_Reload_IRQn,2);
+
+   	FTM3->SC = 0x00FC0068;  // enable Reload IRQ
 }
 
 void Motor_Timer_Init(int pcc_ftm_index, FTM_Type *ftm) {
