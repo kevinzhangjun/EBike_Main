@@ -31,32 +31,17 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	FTM3->SC &= 0x00FF0068;
 	S32_NVIC->ICPR[3] = 1 << (122 & 31); /* IRQ104-FTM3 Reload interrupt: clr any pending IRQ*/
 
-	// read HALL sensors for Motor 1
-	M1.hall_input = (((PTD->PDIR) & 1) << 2)
-				  | (((PTE->PDIR >> 11) & 1) << 1)
-				  | (((PTE->PDIR >> 10) & 1) );
-
 	// There might be time to do a little in here
 	while(adc_complete(ADC0)==0){} /* Wait for conversion complete flag for A-phase currents */
+	TIMING_PIN_LOW
 
 	// Store the reading of phase A currents
 	M1.I_A = read_adc_ch(ADC0, 0);
 	M2.I_A = read_adc_ch(ADC1, 0);
-	M1A = M2.I_A;
 
 	// Start conversion of phase B current on both motors
 	convertAdcChan(ADC0, 8); // convert M1 I_B
 	convertAdcChan(ADC1, 7); // convert M2 I_B
-	TIMING_PIN_LOW
-
-	MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
-	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
-
-	pot1 = ADC_filtered[5];
-	pot2 = ADC_filtered[6];
-
-	// read HALL sensors for Motor 2  - Nice IO selection...
-	M2.hall_input = ((PTA->PDIR >> 11) & 7);
 
 	// There might be time to do a little in here
 
@@ -65,7 +50,23 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	// Store the reading of phase B currents
 	M1.I_B = read_adc_ch(ADC0, 0);
 	M2.I_B = read_adc_ch(ADC1, 0);
+
+	M1A = M2.I_A;
 	M1B = M2.I_B;
+
+	MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
+	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
+
+	pot1 = ADC_filtered[5];
+	pot2 = ADC_filtered[6];
+
+	// read HALL sensors for Motor 1
+	M1.hall_input = (((PTD->PDIR) & 1) << 2)
+				  | (((PTE->PDIR >> 11) & 1) << 1)
+				  | (((PTE->PDIR >> 10) & 1) );
+
+	// read HALL sensors for Motor 2  - Nice IO selection...
+	M2.hall_input = ((PTA->PDIR >> 11) & 7);
 
 	// We need to read a couple other channels every cycle
 	convertAdcChan(ADC0, ADC0_channels[adc_reader]); // convert some channel on ADC0
