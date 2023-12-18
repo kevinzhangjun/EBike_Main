@@ -33,7 +33,28 @@ static int16_t hall_to_theta[8] = { 0,  27307, 5461, 16384, -16384, -27307, -546
 // Software include a x4 prior to Clarke and Park, so 64 counts per amp in our command.
 // A reference of 512 would be about 4A peak.
 
+void MC_Set_Torque(Motor* M, int16_t Nm_q8)
+{
+	if (M->state == MC_DISABLED) {
+		MC_enable_PWM();
+	}
+	M->state = MC_TORQUE;
+	M->Iq_ref = ((int32_t)Nm_q8 * TORQUE_TO_CURRENT) >> 8;
+}
+
+void MC_Set_Speed(Motor* M, int16_t rpm)
+{
+	if (M->state == MC_DISABLED) {
+		MC_enable_PWM();
+	}
+	rpm = ((rpm + 200)/500) * 500;
+	M->Speed_ref = ((int32_t)rpm * RPM_TO_SPEED) >> 14;
+	M->state = MC_SPEED;
+}
+
 void Init_Motor_Control() {
+
+	M1.state = MC_DISABLED;
 	M1.I_gain = 312;
 	M1.P_gain = 24000;              // ~4-5ms current response at 300Hz open loop (position)
 	M1.CC_gain = 100;
@@ -54,7 +75,6 @@ void Init_Motor_Control() {
 	M1.Speed_ref = 0;
 
 	M1.hall_count = 0;
-	M1.state = 0;
 	M1.theta = 0;
 	M1.d_theta = 0;
 
@@ -70,8 +90,6 @@ void Init_Motor_Control() {
 	M1.pwm_a = PWM_OFFSET;
 	M1.pwm_b = PWM_OFFSET;
 	M1.pwm_c = PWM_OFFSET;
-
-	M1.enabled = false;
 
 	M2 = M1;
 	M1.old_hall_theta = (int16_t)(hall_to_theta[M1.hall_input]);
@@ -108,12 +126,6 @@ void MC_do_speed_control(Motor* M)
 
 	// set the current reference
 	M->Iq_ref = output;
-}
-
-void MC_Set_Speed(Motor* M, int16_t rpm)
-{
-	rpm = ((rpm + 200)/500) * 500;
-	M->Speed_ref = ((int32_t)rpm * RPM_TO_SPEED) >> 14;
 }
 
 #define POINT225 14746  /* 0.225 q16 */
@@ -320,11 +332,6 @@ void MC_do_current_control(Motor* M)
     M->pwm_c = PWM_OFFSET - (c * (PWM_RANGE/2) >> 14);
 }
 
-void pause(void) {
-	volatile int x;
-	for (x=0; x<8; x++);
-}
-
 void MC_enable_PWM(void)
 {
 	M1.d_int = 0;
@@ -339,8 +346,11 @@ void MC_enable_PWM(void)
 	M2.hall_count = 0;
 	M2.freq_filt = 0;
 
-	M1.enabled = true;
-    M2.enabled = true;
+	M1.Iq_ref = 0;
+	M2.Iq_ref = 0;
+
+	M1.state = MC_TORQUE;
+    M2.state = MC_TORQUE;
 
     PTD->PSOR = 1<<7;   // ~Reset GD high
 
@@ -348,8 +358,8 @@ void MC_enable_PWM(void)
 void MC_disable_PWM(void)
 {
     PTD->PCOR = 1<<7;    // clear ~GD reset
-    M1.enabled = false;
-    M2.enabled = false;
+    M1.state = MC_DISABLED;
+    M2.state = MC_DISABLED;
 
     FTM3->CONTROLS[6].CnV = PWM_OFFSET; /* FTM ch6 compare value (~50% duty cycle) */
     FTM3->CONTROLS[2].CnV = PWM_OFFSET; /* FTM ch2 compare value (~50% duty cycle) */

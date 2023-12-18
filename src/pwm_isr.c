@@ -18,9 +18,6 @@ int ADC0_channels[9] = { 0, 1, 2, 3, 6, 12, 7, 13, 14 };
 //int ADC1_channels[8] = { 10, 0, 1, 2, 3, 4, 5, 6 };
 int adc_reader = 0;
 
-int32_t pot1;
-int32_t pot2;
-
 void FTM3_Ovf_Reload_IRQHandler(void) {
 	TIMING_PIN_HIGH
 	// Start conversion of phase A current on both motors
@@ -44,21 +41,15 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	convertAdcChan(ADC1, 7); // convert M2 I_B
 
 	// There might be time to do a little in here
-
 	while(adc_complete(ADC0)==0){} /* Wait for conversion complete flag for B-phase currents */
 	TIMING_PIN_HIGH
 	// Store the reading of phase B currents
 	M1.I_B = read_adc_ch(ADC0, 0);
 	M2.I_B = read_adc_ch(ADC1, 0);
 
-	M1A = M2.I_A;
-	M1B = M2.I_B;
-
-	MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
-	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
-
-	pot1 = ADC_filtered[5];
-	pot2 = ADC_filtered[6];
+	// for display in the debugger
+	M1A = M1.I_A;
+	M1B = M1.I_B;
 
 	// read HALL sensors for Motor 1
 	M1.hall_input = (((PTD->PDIR) & 1) << 2)
@@ -75,15 +66,15 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	static uint16_t x = 0;
 	x++;
 	if (x == 20) {
-		MC_do_speed_control(&M1);
-		MC_do_speed_control(&M2);
 		x = 0;
+		if(M1.state == MC_SPEED)
+			MC_do_speed_control(&M1);
+		if(M2.state == MC_SPEED)
+			MC_do_speed_control(&M2);
 	}
-//	M1.Iq_ref = ADC_filtered[5]/2;
-//	M2.Iq_ref = ADC_filtered[6]/2;
 
 	// here we do current control (inner loop - command comes from speed control)
-	if (M1.enabled == true) {
+	if (M1.state != MC_DISABLED) {
 		MC_do_current_control(&M1);
 		MC_do_current_control(&M2);
 	} else {
@@ -112,8 +103,8 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	adc_reader = (adc_reader + 1);
 	if (adc_reader == NUM_ADC) adc_reader = 0;
 
-	int16_t led_speed = M2.d_theta >> 5;
-	if (!M1.enabled)
+	int16_t led_speed = M1.d_theta >> 5;
+	if (M1.state == MC_DISABLED)
 		led_speed = 3;
 	// soft blink the LED
     { // do this every 50us
@@ -121,7 +112,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
         static int16_t a;
         int16_t y = 0x4000 - (((int32_t)x * x) >> 16);
         a = (a & 0x0fff) + (((int32_t)y * y) >> 16);
-//        PTE->PDOR = (a >> 12) ^ 1;   // LED output
+        PTE->PDOR = (a >> 12) ^ 1;   // LED output
 //        x += (uint16_t)(M1.old_hall_theta) / 0x1555; // soft blink speed
         x += led_speed;
 //        x += 3; // soft blink speed

@@ -12,9 +12,9 @@
 #include "S32K142.h"
 #include "stdbool.h"
 
-#define MC_RESET
-#define MC_RUN
-#define MC_INIT
+#define MC_DISABLED		0
+#define MC_SPEED		1
+#define MC_TORQUE		2
 
 typedef struct Motor {
 	// inputs to be collected prior to calling MC_do_control()
@@ -57,23 +57,30 @@ typedef struct Motor {
 	uint16_t pwm_b;  // duty cycle B
 	uint16_t pwm_c;  // duty cycle C
 
-	bool enabled;
 } Motor;
 
 extern Motor M1;
 extern Motor M2;
 
+// application level motor funtions
+void Init_Motor_Control(void);
+void MC_Set_Speed(Motor* M, int16_t rpm);
+void MC_Set_Torque(Motor* M, int16_t Nm_q8);
+
+// use these to specify which motor
+#define SHIFT_MOTOR &M1
+#define ASSIST_MOTOR &M2
+
+// strictly for display in the debugger
 extern int32_t M1A;
 extern int32_t M1B;
 
-void Init_Motor_Control(void);
-void MC_set_deadtime(void);
 void MC_enable_PWM(void);
 void MC_disable_PWM(void);
 void MC_init_pwm(void);
 void MC_do_current_control(Motor* M);
 void MC_do_speed_control(Motor* M);
-void MC_Set_Speed(Motor* M, int16_t rpm);
+
 
 /* This filter takes 16 bit input, 16bit gain (Q14) and 32bit static variable for internal state */
 /* the variable "in" is both the input and output - i.e. sample goes in and is updated to filtered value */
@@ -87,6 +94,7 @@ void MC_Set_Speed(Motor* M, int16_t rpm);
 
 #define MAX_CURRENT_CMD (1100)
 #define RPM_TO_SPEED (65536 * 16384 / 200000)
+#define TORQUE_TO_CURRENT (32 * 256)
 
 
 #endif /* MOTOR_CONTROL_H_ */

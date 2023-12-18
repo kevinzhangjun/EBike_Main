@@ -8,9 +8,22 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
-
+#include "adc.h"
 
 volatile int exit_code = 0;
+
+
+void motor_test() {
+	int16_t pot1 = ADC_filtered[5];
+	int16_t pot2 = ADC_filtered[6];
+
+	if (pot1 > 300) {
+		MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
+//	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
+	} else {
+		MC_disable_PWM();
+	}
+}
 
 /*!
   \brief The main function for the project.
@@ -35,20 +48,15 @@ int main(void)
     Init_Motor_Control();
     MC_disable_PWM();
 
-    while(1)
+    while(exit_code == 0)
     {
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
     	Get_Cdn_In_Value();
+    	motor_test();
     }
 
-    for(;;) {
-    	if(exit_code != 0)
-    	{
-    		break;
-    	}
-    }
   return exit_code;
 
 }
