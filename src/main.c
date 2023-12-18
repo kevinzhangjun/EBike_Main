@@ -9,6 +9,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
 
+
 volatile int exit_code = 0;
 
 /*!
@@ -30,12 +31,18 @@ int main(void)
     GPIO_Init();
     Timer_Init();
     Init_Uart();
+    peripheral_init();
+    Init_Motor_Control();
+    MC_disable_PWM();
 
     while(1)
     {
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
+    	Get_Speed_Value();
+    	Get_Cdn_In_Value();
+    	ADC0_GetResult();
     }
 
     for(;;) {

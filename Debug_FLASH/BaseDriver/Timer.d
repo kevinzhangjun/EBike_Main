@@ -32,16 +32,9 @@ BaseDriver/Timer.o: ../BaseDriver/Timer.c ../BaseDriver/Timer.h \
  C:/workspace_git/EBike_Main/BaseDriver/Timer.h \
  C:/workspace_git/EBike_Main/BaseDriver/Gpio.h \
  C:/workspace_git/EBike_Main/src/e-bike_app.h \
- C:/workspace_git/EBike_Main/board/peripherals_adc_pal_1.h \
- C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal.h \
- C:/workspace_git/EBike_Main/board/adc_pal_cfg.h \
- C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal_mapping.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/adc_driver.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/src/adc/adc_hw_access.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/trgmux_driver.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/pdb_driver.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock_manager.h \
- C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock.h \
+ C:/workspace_git/EBike_Main/src/motor_control.h \
+ C:/workspace_git/EBike_Main/SDK/platform/devices/S32K142/include/S32K142.h \
+ C:/workspace_git/EBike_Main/BaseDriver/peripheral_init.h \
  C:/workspace_git/EBike_Main/BaseDriver/Adc.h
 
 ../BaseDriver/Timer.h:
@@ -112,24 +105,10 @@ C:/workspace_git/EBike_Main/BaseDriver/Gpio.h:
 
 C:/workspace_git/EBike_Main/src/e-bike_app.h:
 
-C:/workspace_git/EBike_Main/board/peripherals_adc_pal_1.h:
+C:/workspace_git/EBike_Main/src/motor_control.h:
 
-C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal.h:
+C:/workspace_git/EBike_Main/SDK/platform/devices/S32K142/include/S32K142.h:
 
-C:/workspace_git/EBike_Main/board/adc_pal_cfg.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/pal/inc/adc_pal_mapping.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/adc_driver.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/src/adc/adc_hw_access.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/trgmux_driver.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/pdb_driver.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock_manager.h:
-
-C:/workspace_git/EBike_Main/SDK/platform/drivers/inc/clock.h:
+C:/workspace_git/EBike_Main/BaseDriver/peripheral_init.h:
 
 C:/workspace_git/EBike_Main/BaseDriver/Adc.h:

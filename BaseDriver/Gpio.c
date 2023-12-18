@@ -10,13 +10,8 @@
 #include "Gpio.h"
 
 Key_Info key_info;
-uint16_t s2_scan;
-uint16_t s2_scan_ll=KEY_GPIO_PIN;
-uint16_t s2_ap;
-uint16_t s2_ap_ll;
-uint16_t s2_Rising;
-uint16_t s2_Falling;
-uint16_t s2_8ms;
+
+Speed_ST Speed_Info;
 
 void GPIO_Init(void)
 {
@@ -25,6 +20,7 @@ void GPIO_Init(void)
 	key_info.Mode_State = mode_init;
 	Lamp_Front_Dis();
 	Lamp_Rear_Dis();
+	EXTI_Configuration();
 
 }
 
@@ -90,18 +86,18 @@ void Lamp_Rear_Dis(void)
 /* KEY App */
 void Key_Scan(void)
 {
-	s2_scan = (PINS_DRV_ReadPins(KEY_GPIO) & KEY_GPIO_PIN)|(PINS_DRV_ReadPins(BRAKE_GPIO) & BRAKE_GPIO_PIN);
-	s2_ap |=s2_scan ^ s2_scan_ll;
-	s2_scan_ll = s2_scan;
+	key_info.s2_scan = (PINS_DRV_ReadPins(KEY_GPIO) & KEY_GPIO_PIN)|(PINS_DRV_ReadPins(BRAKE_GPIO) & BRAKE_GPIO_PIN);
+	key_info.s2_ap |=key_info.s2_scan ^ key_info.s2_scan_ll;
+	key_info.s2_scan_ll = key_info.s2_scan;
 }
 
 void Key_State_Result(void)
 {
-	s2_Falling |= (~s2_scan) & s2_ap_ll & (~s2_ap);
-	s2_Rising |= s2_scan & s2_ap_ll & (~s2_ap);
+	key_info.s2_Falling |= (~key_info.s2_scan) & key_info.s2_ap_ll & (~key_info.s2_ap);
+	key_info.s2_Rising |= key_info.s2_scan & key_info.s2_ap_ll & (~key_info.s2_ap);
 
-	s2_ap_ll = s2_ap;
-	s2_ap = 0;
+	key_info.s2_ap_ll = key_info.s2_ap;
+	key_info.s2_ap = 0;
 
 	key_info.Cnt_64ms++;
 }
@@ -109,11 +105,11 @@ void Key_State_Result(void)
 void Key_Routine(void)
 {
 
-	if(s2_Falling & KEY_GPIO_PIN)
+	if(key_info.s2_Falling & KEY_GPIO_PIN)
 	{
-		s2_Falling &= (~KEY_GPIO_PIN);
+		key_info.s2_Falling &= (~KEY_GPIO_PIN);
 
-		if(s2_8ms < S2_Double_Cnt && key_info.Mode_State == mode1_Auto)
+		if(key_info.Cnt_8ms < S2_Double_Cnt && key_info.Mode_State == mode1_Auto)
 		{
 			key_info.Mode_State = mode3_Manual_Adjust;
 
@@ -122,7 +118,7 @@ void Key_Routine(void)
 		{
 			key_info.Mode_State++;
 			key_info.Cnt_64ms =0;
-			s2_8ms =0;
+			key_info.Cnt_8ms =0;
 			if(key_info.Mode_State == mode3_Manual_Adjust || key_info.Mode_State == end_mode)
 			{
 				key_info.Mode_State = mode1_Auto;
@@ -135,9 +131,9 @@ void Key_Routine(void)
 		}
 
 	}
-	else if(s2_Rising & KEY_GPIO_PIN)
+	else if(key_info.s2_Rising & KEY_GPIO_PIN)
 	{
-		s2_Rising &= (~KEY_GPIO_PIN);
+		key_info.s2_Rising &= (~KEY_GPIO_PIN);
 
 		key_info.Cnt_64ms =0;
 		if(key_info.Mode_State	== mode4_Manual_Run)
@@ -158,7 +154,7 @@ void Key_Routine(void)
 			//nothing to do
 		}
 	}
-	else if((s2_scan & KEY_GPIO_PIN) == 0)
+	else if((key_info.s2_scan & KEY_GPIO_PIN) == 0)
 	{
 		if(key_info.Mode_State < mode3_Manual_Adjust)
 		{
@@ -190,7 +186,7 @@ void Key_Routine(void)
 			//nothing to do
 		}
 	}
-	else if((s2_scan & KEY_GPIO_PIN) != 0)
+	else if((key_info.s2_scan & KEY_GPIO_PIN) != 0)
 	{
 		if(key_info.Mode_State < mode3_Manual_Adjust)
 		{
@@ -207,29 +203,97 @@ void Key_Routine(void)
 	}
 }
 
-void Brake_Routine(void)
+
+/*******************************************************************************
+*
+* Function: 	void SPEED_ISR(void)
+*
+*******************************************************************************/
+void SPEED_ISR( void )
 {
-
-	if(s2_Falling & BRAKE_GPIO_PIN)
+	uint32_t intStatus;
+	/* check interrupt flags PTD16 and 15 */
+	intStatus = PINS_DRV_GetPortIntFlag( SPEED_PORT );
+	if(intStatus & SPEED_GPIO_PIN )
 	{
-		s2_Falling &= (~BRAKE_GPIO_PIN);
 
-		if(MT_State == MT_Run)
+		PINS_DRV_ClearPinIntFlagCmd( SPEED_PORT, SPEED_ID);
+
+		if(Speed_Info.Speed_Cnt_50us !=0)
 		{
-			MT_State = MT_Stop;
-			if(key_info.Mode_State	== mode4_Manual_Run)
+			Speed_Info.Speed_Value = Speed_Info.Speed_Cnt_50us;
+
+			Speed_Info.Speed_Cnt_50us = 0;
+		}
+		else
+		{
+
+		}
+	}
+
+	if(intStatus & CADENCE_IN_GPIO_PIN )
+	{
+
+		PINS_DRV_ClearPinIntFlagCmd( SPEED_PORT, CADENCE_IN_ID);
+
+		if(Speed_Info.Cdn_In_Cnt_50us !=0)
+		{
+			Speed_Info.Cdn_In_Value = Speed_Info.Cdn_In_Cnt_50us;
+
+			Speed_Info.Cdn_In_Cnt_50us = 0;
+
+			if(Speed_Info.Cdn_In_Dir_50us < CADENCE_IN_DIR_THRESHOLD)
 			{
-				key_info.Mode_State	= mode5_Manual_Stop;
+				Speed_Info.Cdn_In_Dir_Flt_Backward++;
+				Speed_Info.Cdn_In_Dir_Flt_Forward = 0;
+				if(Speed_Info.Cdn_In_Dir_Flt_Backward > 2 )
+				{
+					Speed_Info.Cdn_In_Dir = CDN_IN_BACKWARD;
+					Speed_Info.Cdn_In_Dir_Flt_Backward = 0;
+				}
+
 			}
+			else
+			{
+				Speed_Info.Cdn_In_Dir_Flt_Forward++;
+				Speed_Info.Cdn_In_Dir_Flt_Backward = 0;
+				if(Speed_Info.Cdn_In_Dir_Flt_Forward > 2)
+				{
+					Speed_Info.Cdn_In_Dir = CDN_IN_FORWARD;
+					Speed_Info.Cdn_In_Dir_Flt_Forward = 0;
+				}
+
+			}
+
+			Speed_Info.Cdn_In_Dir_50us = 0;
+		}
+		else
+		{
 
 		}
 	}
 	else
 	{
-		//nothing to do
+
 	}
 }
 
+/********************************************************************************************
+*Function Name: void EXTI_Configuration(void)
+*
+*Input parameter: None
+*Output parameter: None
+*
+*
+*******************************************************************************************/
 
+void EXTI_Configuration(void)
+{
 
+	PINS_DRV_SetPinIntSel(SPEED_PORT, SPEED_ID, PORT_INT_RISING_EDGE);
+	PINS_DRV_SetPinIntSel(SPEED_PORT, CADENCE_IN_ID, PORT_INT_FALLING_EDGE);
+	INT_SYS_SetPriority(SPEED_PORT_IRQn,1);
+    INT_SYS_InstallHandler(SPEED_PORT_IRQn, &SPEED_ISR, NULL);
+    INT_SYS_EnableIRQ(SPEED_PORT_IRQn);
+}
 

@@ -24,7 +24,6 @@ BaseDriver \
 Project_Settings/Startup_Code \
 SDK/platform/devices/S32K142/startup \
 SDK/platform/devices \
-SDK/platform/drivers/src/adc \
 SDK/platform/drivers/src/clock/S32K1xx \
 SDK/platform/drivers/src/edma \
 SDK/platform/drivers/src/ftm \
@@ -32,10 +31,7 @@ SDK/platform/drivers/src/interrupt \
 SDK/platform/drivers/src/lpit \
 SDK/platform/drivers/src/lptmr \
 SDK/platform/drivers/src/lpuart \
-SDK/platform/drivers/src/pdb \
 SDK/platform/drivers/src/pins \
-SDK/platform/drivers/src/trgmux \
-SDK/platform/pal/src/adc \
 SDK/platform/pal/src/timing \
 SDK/rtos/osif \
 board \

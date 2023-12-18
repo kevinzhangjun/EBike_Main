@@ -36,10 +36,8 @@
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.libraries.929196910" name="Libraries support" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.libraries" useByScannerDiscovery="false" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.libraries.newlib_nano_noio" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.502470945" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\workspace_git\EBike_Main\SDK\platform\drivers\src\adc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\workspace_git\EBike_Main\SDK/platform/pal/inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\workspace_git\EBike_Main\SDK/platform/pal/src/timing&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\workspace_git\EBike_Main\SDK/platform/pal/src/adc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/BaseDriver}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\workspace_git\EBike_Main\SDK/platform/devices/S32K142/include&quot;"/>
