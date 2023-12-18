@@ -18,8 +18,8 @@ void motor_test() {
 	int16_t pot2 = ADC_filtered[6];
 
 	if (pot1 > 300) {
-		MC_Set_Speed( &M1, ADC_filtered[5]*3/4 );
-//	MC_Set_Speed( &M2, ADC_filtered[6]*3/4 );
+		MC_Set_Speed( SHIFT_MOTOR, pot1 );
+//	MC_Set_Speed( ASSIST_MOTOR, pot2*3/4 );
 	} else {
 		MC_disable_PWM();
 	}

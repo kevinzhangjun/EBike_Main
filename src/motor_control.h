@@ -87,12 +87,12 @@ void MC_do_speed_control(Motor* M);
 #define LPF16(in,gain,st) (in=(int16_t)((st = (st)-((int32_t)gain*((int16_t)((st)>>14)))+(int32_t)gain*in)>>14))
 
 #define PWM_PERIOD 1200
-#define MIN_PWM 400
+#define MIN_PWM 250
 #define MAX_PWM 1150
 #define PWM_RANGE (MAX_PWM-MIN_PWM)
 #define PWM_OFFSET ((MAX_PWM+MIN_PWM)/2)
 
-#define MAX_CURRENT_CMD (1100)
+#define MAX_CURRENT_CMD (2500)      // this could be 8192ish
 #define RPM_TO_SPEED (65536 * 16384 / 200000)
 #define TORQUE_TO_CURRENT (32 * 256)
 

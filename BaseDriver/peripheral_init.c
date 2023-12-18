@@ -112,8 +112,9 @@ void Motor_Timer_Init(int pcc_ftm_index, FTM_Type *ftm) {
  	 	 	 	 	 	 /* PS (Prescaler factor) = 1. Prescaler = 0 */
  ftm->COMBINE = 0x32323200;/* FTM mode settings used: DECAPENx, MCOMBINEx, COMBINEx=0 */
 
-#define DEADTIME_VAL (0x00008080 + 8)
- ftm->DEADTIME = DEADTIME_VAL;   // 400ns deadtime  80MHz/4 = 20MHz(50ns) and 8 cycles of that
+#define DEADTIME_VAL (0x00008080 + 5)
+ ftm->DEADTIME = DEADTIME_VAL;   // 416ns deadtime  48MHz/4 = 12MHz(83.3ns) and 5 cycles of that
+// ftm->DEADTIME = DEADTIME_VAL;   // 400ns deadtime  80MHz/4 = 20MHz(50ns) and 8 cycles of that
  //ftm->DEADTIME = 0x00008096;   // 1000ns deadtime  80MHz/4 = 20MHz and 22 cycles of that
 
  ftm->MOD = 1200 -1 ;	/* FTM1 counter final value (used for PWM mode) */
