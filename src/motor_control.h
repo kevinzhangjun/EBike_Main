@@ -86,9 +86,9 @@ void MC_do_speed_control(Motor* M);
 /* the variable "in" is both the input and output - i.e. sample goes in and is updated to filtered value */
 #define LPF16(in,gain,st) (in=(int16_t)((st = (st)-((int32_t)gain*((int16_t)((st)>>14)))+(int32_t)gain*in)>>14))
 
-#define PWM_PERIOD 2000
+#define PWM_PERIOD 1200
 #define MIN_PWM 400
-#define MAX_PWM 1900
+#define MAX_PWM 1150
 #define PWM_RANGE (MAX_PWM-MIN_PWM)
 #define PWM_OFFSET ((MAX_PWM+MIN_PWM)/2)
 
