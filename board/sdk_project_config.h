@@ -29,6 +29,7 @@
 #include "e-bike_app.h"
 #include "motor_control.h"
 #include "peripheral_init.h"
+#include "Adc.h"
 
 
 #endif /* SDK_PROJECT_CONFIG_H_ */

@@ -47,13 +47,15 @@ typedef struct
 }Idt_EB_APP_T;
 
 void e_bike_app_init(void);
-
-
+void Brake_Routine(void);
+void ADC0_GetResult(void);
 
 void MT_RST_On(void);
 void MT_RST_Off(void);
 void MT_ESF_On(void);
 void MT_ESF_Off(void);
+
+
 
 void Get_Speed_Value(void);
 

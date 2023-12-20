@@ -40,7 +40,9 @@ int main(void)
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
+    	Get_Speed_Value();
     	Get_Cdn_In_Value();
+    	ADC0_GetResult();
     }
 
     for(;;) {

@@ -109,6 +109,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 	ADC_results[adc_reader] = adc_val0;
 //	ADC_results[adc_reader + 8] = read_adc_ch(ADC1, 0);
 	ADC_filtered[adc_reader] = LPF16(adc_val0, 4000, ADC_filter_state[adc_reader]);
+
 	adc_reader = (adc_reader + 1);
 	if (adc_reader == NUM_ADC) adc_reader = 0;
 
@@ -126,5 +127,13 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
         x += led_speed;
 //        x += 3; // soft blink speed
     }
+
+    Speed_Info.Speed_Cnt_50us++;
+    Speed_Info.Cdn_In_Cnt_50us++;
+    if((PINS_DRV_ReadPins(CADENCE_IN_GPIO) & CADENCE_IN_GPIO_PIN) == 0)
+    {
+    	Speed_Info.Cdn_In_Dir_50us++;
+    }
+
     TIMING_PIN_LOW
 }
