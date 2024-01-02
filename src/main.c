@@ -53,8 +53,10 @@ int main(void)
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
+    	Get_Speed_Value();
     	Get_Cdn_In_Value();
     	motor_test();
+    	ADC0_GetResult();
     }
 
   return exit_code;

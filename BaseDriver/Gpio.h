@@ -50,20 +50,38 @@
 #define BRAKE_ID   			(3u)
 #define BRAKE_GPIO_PIN   	(1<<BRAKE_ID)
 
+
+/*****Speed接口声明*****/
+#define SPEED_GPIO  		(PTD)
+#define SPEED_PORT  		(PORTD)
+#define SPEED_ID   			(1u)
+#define SPEED_GPIO_PIN   	(1<<SPEED_ID)
+#define SPEED_PORT_IRQn 	PORTD_IRQn
+#define SPEED_DIR_THRESHOLD 8
+
 /*****CADENCE_IN接口声明*****/
 #define CADENCE_IN_GPIO  			(PTD)
 #define CADENCE_IN_PORT  			(PORTD)
 #define CADENCE_IN_ID   			(16u)
 #define CADENCE_IN_GPIO_PIN   		(1<<CADENCE_IN_ID)
 #define CADENCE_IN_PORT_IRQn 		PORTD_IRQn
-#define CADENCE_IN_DIR_THRESHOLD 	8
+#define CADENCE_IN_DIR_THRESHOLD 	2
 
 #define Revolution				20
-#define CDN_IN_RPM_1_Period		60*1000*100/Revolution
-#define CDN_IN_RPM_480_Period	1*125*100/Revolution
-#define CDN_IN_RPM_Factor		60*1000*100/Revolution
+#define CDN_IN_RPM_1_Period		60*1000*20/Revolution
+#define CDN_IN_RPM_480_Period	1*125*20/Revolution
+#define CDN_IN_RPM_Factor		60*1000*20/Revolution
 
-
+#define Whirl_Size			26
+#define Tire_Thick			1.5
+#define Inch_mm 			25.4
+#define Mile_M				1600000
+#define KM_M				1000000
+#define PI					3.14159
+#define Time_Factor			3600*1000*20
+#define RPM_1_Period		60*1000*20
+#define RPM_480_Period		1*125*20
+#define SPEED_RPM_Factor	60*1000*20
 
 typedef enum
 {
@@ -82,7 +100,14 @@ typedef struct
 	bool      	PwrOff_State;
 	bool		Brake1_State;
 	bool 		Brake2_State;
-	uint32_t  Cnt_64ms;      //计数 64ms
+	uint16_t 	s2_scan;
+	uint16_t 	s2_scan_ll;
+	uint16_t 	s2_ap;
+	uint16_t 	s2_ap_ll;
+	uint16_t 	s2_Rising;
+	uint16_t 	s2_Falling;
+	uint32_t  	Cnt_8ms;      //计数 64ms
+	uint32_t    Cnt_64ms;      //计数 64ms
 }Key_Info;
 
 typedef enum
@@ -95,9 +120,9 @@ typedef struct
 	CDN_IN_DIR_ID	  Cdn_In_Dir;
 	uint8_t 		  Cdn_In_Dir_Flt_Backward;
 	uint8_t 		  Cdn_In_Dir_Flt_Forward;
-	uint32_t volatile Cdn_In_Dir_10us;
-	uint32_t volatile Speed_Cnt_10us;
-	uint32_t volatile Cdn_In_Cnt_10us;
+	uint32_t volatile Cdn_In_Dir_50us;
+	uint32_t volatile Speed_Cnt_50us;
+	uint32_t volatile Cdn_In_Cnt_50us;
 	uint32_t volatile Speed_Value;
 	uint32_t 		  Speed_Value_lst;
 	uint32_t volatile Cdn_In_Value;
@@ -127,7 +152,6 @@ void Lamp_Front_Dis(void);
 void Lamp_Rear_En(void);
 void Lamp_Rear_Dis(void);
 
-void Brake_Routine(void);
 
 
 void EXTI_Configuration(void);

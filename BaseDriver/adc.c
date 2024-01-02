@@ -8,6 +8,8 @@
 #include "S32K142.h"
 #include "ADC.h"
 
+Idt_ADC_T ADC_ST;
+
 uint16_t ADC_results[NUM_ADC];
 uint16_t ADC_filtered[NUM_ADC];
 int32_t ADC_filter_state[NUM_ADC];
