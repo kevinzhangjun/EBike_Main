@@ -110,8 +110,8 @@ void Time_1ms_Tasks(void)
 
 void Time_2ms_Tasks(void)
 {
-	tr0_2ms++;
-	tx0_2ms++;
+	Uart0.tr_2ms++;
+	Uart0.tx_2ms++;
 }
 
 void Time_4ms_Tasks(void)

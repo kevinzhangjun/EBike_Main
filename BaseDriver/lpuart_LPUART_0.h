@@ -24,27 +24,30 @@
  ******************************************************************************/
 #define INST_LPUART_LPUART_0  0
 /* Receive buffer size */
-#define BUFFER_SIZE 256U
+#define BUFFER_SIZE 64U
 
-/* External declaration of LPUART configuration structure */
-extern const lpuart_user_config_t lpUartInitConfig1;
 
-extern lpuart_state_t lpUartState1;
+typedef struct
+{
+	uint8_t tr_idx;
+	uint8_t tr_buf[BUFFER_SIZE];
+	uint16_t tr_2ms;
 
-extern uint8_t tr0_idx;
-extern uint8_t tr0_buf[BUFFER_SIZE];
-extern uint8_t tr0_2ms;
+	uint8_t tx_idx;
+	uint8_t tx_len;
+	uint8_t tx_buf[BUFFER_SIZE];
+	uint16_t tx_2ms;
+}UART_T;
 
-extern uint8_t tx0_idx;
-extern uint8_t tx0_length;
-extern uint8_t tx0_buf[BUFFER_SIZE];
-extern uint8_t tx0_2ms;
 
 void Init_Uart(void);
 void rxCallback(void *driverState, uart_event_t event, void *userData);
 void txCallback(void *driverState, uart_event_t event, void *userData);
 void start_tx(uint8_t len);
 
+
+extern lpuart_state_t lpUartState1;
+extern UART_T Uart0;
 
 
 #endif /* lpuart_LPUART_1_H */

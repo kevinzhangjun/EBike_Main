@@ -16,7 +16,7 @@
 #define read_adc_ch(adc, chan) (adc->R[chan])
 
 //#define ADC_CHN         ADC_INPUTCHAN_EXT14
-#define ADC_VREFH       5.00f
+#define ADC_VREFH       5.06f
 #define ADC_VREFL       0.0f
 #define	ADC_MAX			(1<<12)
 #define Bat_Volt_Factor	13

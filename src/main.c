@@ -8,14 +8,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
-#include "adc.h"
 
 volatile int exit_code = 0;
 
 
 void motor_test() {
 	int16_t pot1 = ADC_filtered[5];
-	int16_t pot2 = ADC_filtered[6];
+//	int16_t pot2 = ADC_filtered[6];
 
 	if (pot1 > 300) {
 		MC_Set_Speed( SHIFT_MOTOR, pot1 );
@@ -55,8 +54,9 @@ int main(void)
     	Brake_Routine();
     	Get_Speed_Value();
     	Get_Cdn_In_Value();
-    	motor_test();
+//    	motor_test();
     	ADC0_GetResult();
+    	HMI_Handler();
     }
 
   return exit_code;

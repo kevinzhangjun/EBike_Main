@@ -5,6 +5,7 @@
 
 #define No_Debug			1
 
+
 #define CMD_Len	sizeof(float)*9+8
 
 
@@ -48,21 +49,13 @@ typedef struct
 
 void e_bike_app_init(void);
 void Brake_Routine(void);
+void Get_Speed_Value(void);
+void Get_Cdn_In_Value(void);
 void ADC0_GetResult(void);
 
-void MT_RST_On(void);
-void MT_RST_Off(void);
-void MT_ESF_On(void);
-void MT_ESF_Off(void);
 
 
 
-void Get_Speed_Value(void);
-
-void Motor_Handler(void);
-void Monitor_Handler(void);
-
-void Get_Cdn_In_Value(void);
 
 
 extern Motor_ID MT_State;

@@ -1,6 +1,6 @@
 /******************************************************************
 **	  E_Bike
-**	  Uart Interrupt
+**	  application
 **
 **    Versiomn: V1.0
 **	  Author  : Kevin Zhang
@@ -141,3 +141,6 @@ void ADC0_GetResult(void)
 		}
 	}
 }
+
+
+

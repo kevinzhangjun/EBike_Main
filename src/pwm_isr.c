@@ -103,7 +103,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 
 	adc_reader = (adc_reader + 1);
 	if (adc_reader == NUM_ADC) adc_reader = 0;
-
+#if(0)
 	int16_t led_speed = M1.d_theta >> 5;
 	if (M1.state == MC_DISABLED)
 		led_speed = 3;
@@ -118,7 +118,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
         x += led_speed;
 //        x += 3; // soft blink speed
     }
-
+#endif
     Speed_Info.Speed_Cnt_50us++;
     Speed_Info.Cdn_In_Cnt_50us++;
     if((PINS_DRV_ReadPins(CADENCE_IN_GPIO) & CADENCE_IN_GPIO_PIN) == 0)

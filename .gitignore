@@ -1,5 +1,1 @@
-Debug_FLASH
-Doxygen
-*.o
-*.map
-*.elf
+/Debug_FLASH/
