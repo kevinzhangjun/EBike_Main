@@ -8,21 +8,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sdk_project_config.h"
+#include "bike_control.h"
+#include "blackboard.h"
 
-volatile int exit_code = 0;
-
-
-void motor_test() {
-	int16_t pot1 = ADC_filtered[5];
-//	int16_t pot2 = ADC_filtered[6];
-
-	if (pot1 > 300) {
-		MC_Set_Speed( SHIFT_MOTOR, pot1 );
-//	MC_Set_Speed( ASSIST_MOTOR, pot2*3/4 );
-	} else {
-		MC_disable_PWM();
-	}
-}
+struct blackboard bb;
 
 /*!
   \brief The main function for the project.
@@ -30,6 +19,12 @@ void motor_test() {
  * - __start (startup asm routine)
  * - main()
 */
+
+#define SYS_STATE_INIT        0
+#define SYS_STATE_NORMAL      1
+#define SYS_STATE_UART_TEST   2
+#define SYS_STATE_ALPHA1_TEST 3
+
 int main(void)
 {
 
@@ -47,19 +42,40 @@ int main(void)
     Init_Motor_Control();
     MC_disable_PWM();
 
-    while(exit_code == 0)
+    int sys_state = SYS_STATE_INIT;
+
+    while(1)
     {
     	//base routine call
     	Key_Routine();
     	Brake_Routine();
     	Get_Speed_Value();
     	Get_Cdn_In_Value();
-//    	motor_test();
     	ADC0_GetResult();
     	HMI_Handler();
-    }
 
-  return exit_code;
+    	switch (sys_state)
+    	{
+    	case SYS_STATE_INIT:
+    		// currently there is nothing to do here
+			sys_state = SYS_STATE_NORMAL;
+    		break;
+
+    	case SYS_STATE_NORMAL:
+			do_bike_control();
+    		break;
+
+    	case SYS_STATE_UART_TEST:
+			break;
+
+    	case SYS_STATE_ALPHA1_TEST:
+			motor_test();
+    		break;
+
+    	default:
+    		sys_state = SYS_STATE_INIT;
+    	}
+    }
 
 }
 

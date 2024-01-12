@@ -66,6 +66,8 @@ extern Motor M2;
 void Init_Motor_Control(void);
 void MC_Set_Speed(Motor* M, int16_t rpm);
 void MC_Set_Torque(Motor* M, int16_t Nm_q8);
+int16_t MC_Get_Speed(Motor* M);
+int16_t MC_Get_Torque(Motor* M);
 
 // use these to specify which motor
 #define SHIFT_MOTOR &M1
@@ -94,7 +96,10 @@ void MC_do_speed_control(Motor* M);
 
 #define MAX_CURRENT_CMD (2500)      // this could be 8192ish
 #define RPM_TO_SPEED (65536 * 16384 / 200000)
+#define SPEED_TO_RPM (4096 * 200000 / 65536)
 #define TORQUE_TO_CURRENT (32 * 256)
+#define CURRENT_TO_TORQUE (256 * 1 / 32)
+#define C_TO_T_SHIFT 8
 
 
 #endif /* MOTOR_CONTROL_H_ */

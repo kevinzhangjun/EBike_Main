@@ -42,14 +42,25 @@ void MC_Set_Torque(Motor* M, int16_t Nm_q8)
 	M->Iq_ref = ((int32_t)Nm_q8 * TORQUE_TO_CURRENT) >> 8;
 }
 
+int16_t MC_Get_Torque(Motor* M)
+{
+	int16_t torque = ((int32_t)(M->Iq_ref) * CURRENT_TO_TORQUE) >> C_TO_T_SHIFT;
+	return torque;
+}
+
 void MC_Set_Speed(Motor* M, int16_t rpm)
 {
 	if (M->state == MC_DISABLED) {
 		MC_enable_PWM();
 	}
-	rpm = ((rpm + 200)/500) * 500;
 	M->Speed_ref = ((int32_t)rpm * RPM_TO_SPEED) >> 14;
 	M->state = MC_SPEED;
+}
+
+int16_t MC_Get_Speed(Motor* M)
+{
+	int16_t speed = ((int32_t)(M->d_theta) * SPEED_TO_RPM) >> 12;
+	return speed;
 }
 
 void Init_Motor_Control() {

@@ -119,6 +119,7 @@ void FTM3_Ovf_Reload_IRQHandler(void) {
 //        x += 3; // soft blink speed
     }
 #endif
+
     Speed_Info.Speed_Cnt_50us++;
     Speed_Info.Cdn_In_Cnt_50us++;
     if((PINS_DRV_ReadPins(CADENCE_IN_GPIO) & CADENCE_IN_GPIO_PIN) == 0)
